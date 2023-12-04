@@ -19,7 +19,8 @@ class AuthController extends Controller
         $request->validate([$request->all()]);
 
         $user=User::create([
-            'name'=>$request->name,
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'is_doctor'=>$request->is_doctor,
