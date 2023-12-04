@@ -21,10 +21,19 @@ class LoginController extends Controller
 
         $user = Auth::user();
 
+        if($user->is_doctor){
+            return $this->success([
+                'user'=>$user,
+                'token'=>$user->createToken('API Token of '. $user->name)->plainTextToken,
+                'message'=>'you are doctor'
+            ]);
+        }
         return $this->success([
             'user'=>$user,
-            'token'=>$user->createToken('API Token of '. $user->name)->plainTextToken
+            'token'=>$user->createToken('API Token of '. $user->name)->plainTextToken,
+            'message'=>'you are not  doctor'
         ]);
+
     }
 
 }
