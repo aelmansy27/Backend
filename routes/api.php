@@ -33,4 +33,8 @@ Route::post('password/reset',[ResetPasswordController::class,'resetPassword']);
 //protected routes
 Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/logout',[LogoutController::class,'logout']);
+    //cow routes
+    Route::get('/cows',[CowController::class,'index']);
+    Route::get('/cows/show/{id}',[CowController::class,'show'])->name('show_cow');
+    Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
 });
