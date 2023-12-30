@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\UserView\ActivityPlaceController;
 use App\Http\Controllers\UserView\CowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/cows',[CowController::class,'index']);
     Route::get('/cows/show/{id}',[CowController::class,'show'])->name('show_cow');
     Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
+
+    Route::get('/activity_places',[ActivityPlaceController::class,'index']);
+    Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
+
 });
