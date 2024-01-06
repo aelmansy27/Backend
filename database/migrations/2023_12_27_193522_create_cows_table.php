@@ -17,21 +17,23 @@ return new class extends Migration
             $table->foreignId('activityplace_id');
             $table->foreignId('activitysystem_id');
             $table->string('original_area');
+            $table->string('appearance');
             $table->enum('sex',['heifer','bull']);
             $table->timestamp('entrance_date')->nullable();
             $table->timestamp('age')->nullable();
             $table->timestamp('sleep_hour')->nullable();
             $table->timestamp('eating_duration')->nullable();
             $table->timestamp('laydown_duration')->nullable();
+            $table->decimal('weight');
             $table->decimal('milk_amount');
             $table->decimal('heart_rate');
             $table->decimal('pressure');
             $table->decimal('temperature');
             $table->decimal('sugar_rate');
             $table->decimal('distance');
-            $table->decimal('eating_amount');
             $table->decimal('jaw_movement_rate');
             $table->decimal('movement_rate');
+            $table->boolean('cow_status');
             $table->timestamps();
         });
     }
