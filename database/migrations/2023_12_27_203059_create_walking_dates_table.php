@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('walking_dates', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('activity_system_id');
             $table->timestamp('walking_start')->nullable();
             $table->timestamp('walking_end')->nullable();
