@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('activity_places', function (Blueprint $table) {
             $table->id();
             $table->integer('capacity');
-            $table->timestamp('antisepsis_date')->nullable();
+            $table->dateTimeTz('antisepsis_date')->nullable();
             $table->string('type');
             $table->timestamps();
         });

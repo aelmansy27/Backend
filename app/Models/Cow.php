@@ -14,7 +14,7 @@ class Cow extends Model
         parent::boot();
 
         static::creating(function ($cow){
-            $cow->cow_id=sprintf("%06d",mt_rand(1,999999));
+            $cow->cowId=sprintf("%06d",mt_rand(1,999999));
         });
     }
     public function activityPlace()

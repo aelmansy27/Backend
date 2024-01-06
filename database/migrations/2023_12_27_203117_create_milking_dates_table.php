@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('milking_dates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_system_id');
-            $table->timestamp('milking_start')->nullable();
-            $table->timestamp('milking_end')->nullable();
+            $table->dateTimeTz('milking_start')->nullable();
+            $table->dateTimeTz('milking_end')->nullable();
             $table->timestamps();
         });
     }

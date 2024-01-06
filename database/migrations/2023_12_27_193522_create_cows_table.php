@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('original_area');
             $table->string('appearance');
             $table->enum('sex',['heifer','bull']);
-            $table->timestamp('entrance_date')->nullable();
-            $table->timestamp('age')->nullable();
-            $table->timestamp('sleep_hour')->nullable();
-            $table->timestamp('eating_duration')->nullable();
-            $table->timestamp('laydown_duration')->nullable();
+            $table->dateTimeTz('entrance_date')->nullable();
+            $table->dateTimeTz('age')->nullable();
+            $table->dateTimeTz('sleep_hour')->nullable();
+            $table->dateTimeTz('eating_duration')->nullable();
+            $table->dateTimeTz('laydown_duration')->nullable();
             $table->decimal('weight');
             $table->decimal('milk_amount');
             $table->decimal('heart_rate');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->decimal('distance');
             $table->decimal('jaw_movement_rate');
             $table->decimal('movement_rate');
-            $table->boolean('cow_status');
+            $table->boolean('cow_status')->default(true);
             $table->timestamps();
         });
     }

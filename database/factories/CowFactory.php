@@ -25,25 +25,27 @@ class CowFactory extends Factory
         $activityPlaceId=1;
         $activitySystemId=1;
         return [
-            'cow_id'=>sprintf("%06d",mt_rand(1,999999)),
+            'cowId'=>sprintf("%06d",mt_rand(1,999999)),
             'activityplace_id'=>$activityPlaceId,
             'activitysystem_id'=>$activitySystemId,
             'original_area'=>$this->faker->word,
+            'appearance'=>$this->faker->word,
             'sex'=>$this->faker->randomElement(['heifer','bull']),
             'entrance_date'=>$this->faker->dateTime,
-            'age'=>$this->faker->dateTime(),
+            'age'=>$this->faker->dateTime,
             'sleep_hour'=>$this->faker->dateTime,
             'eating_duration'=>$this->faker->dateTime,
             'laydown_duration'=>$this->faker->dateTime,
+            'weight'=>$this->faker->randomFloat(2,10,1000),
             'milk_amount'=>$this->faker->randomFloat(2,1,10),
             'heart_rate'=>$this->faker->randomFloat(2,20,200),
             'pressure'=>$this->faker->randomFloat(2,60,200),
             'temperature'=>$this->faker->randomFloat(2,30,50),
             'sugar_rate'=>$this->faker->randomFloat(2,50,200),
             'distance'=>$this->faker->randomFloat(2,0,1000000),
-            'eating_amount'=>$this->faker->randomFloat(2,0,100),
             'jaw_movement_rate'=>$this->faker->randomFloat(2,0,10000),
-            'movement_rate'=>$this->faker->randomFloat(2,0,10000)
+            'movement_rate'=>$this->faker->randomFloat(2,0,10000),
+            'cow_status'=>$this->faker->boolean
         ];
     }
 }
