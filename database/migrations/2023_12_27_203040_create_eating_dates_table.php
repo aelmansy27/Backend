@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('eating_dates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_system_id');
-            $table->timestamp('eating_start')->nullable();
-            $table->timestamp('eating_end')->nullable();
+            $table->dateTimeTz('eating_start')->nullable();
+            $table->dateTimeTz('eating_end')->nullable();
             $table->timestamps();
         });
     }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('walking_dates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_system_id');
-            $table->timestamp('walking_start')->nullable();
-            $table->timestamp('walking_end')->nullable();
+            $table->dateTimeTz('walking_start')->nullable();
+            $table->dateTimeTz('walking_end')->nullable();
             $table->timestamps();
         });
     }
