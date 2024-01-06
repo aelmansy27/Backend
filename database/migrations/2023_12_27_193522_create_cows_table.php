@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cows', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('cow_id',6)->unique();
+            $table->id();
+            $table->string('cowId',6)->unique();
             $table->foreignId('activityplace_id');
             $table->foreignId('activitysystem_id');
             $table->string('original_area');
