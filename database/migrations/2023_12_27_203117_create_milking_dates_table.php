@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('milking_dates', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('activity_system_id');
             $table->timestamp('milking_start')->nullable();
             $table->timestamp('milking_end')->nullable();

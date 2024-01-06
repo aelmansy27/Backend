@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activity_places', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->integer('capacity');
             $table->timestamp('antisepsis_date')->nullable();
             $table->string('type');
