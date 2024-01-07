@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cows', function (Blueprint $table) {
             $table->id();
+            $table->string('cowId',6)->unique();
             $table->foreignId('activityplace_id');
             $table->foreignId('activitysystem_id');
             $table->string('original_area');
@@ -32,7 +33,7 @@ return new class extends Migration
             $table->decimal('distance');
             $table->decimal('jaw_movement_rate');
             $table->decimal('movement_rate');
-            $table->boolean('cow_status');
+            $table->boolean('cow_status')->default(true);
             $table->timestamps();
         });
     }

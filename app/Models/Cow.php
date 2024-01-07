@@ -9,6 +9,14 @@ class Cow extends Model
 {
     use HasFactory;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($cow){
+            $cow->cowId=sprintf("%06d",mt_rand(1,999999));
+        });
+    }
     public function activityPlace()
     {
         return $this->belongsTo(ActivityPlace::class);
