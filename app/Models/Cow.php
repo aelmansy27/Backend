@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cow extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
     protected static function boot()
     {
@@ -20,7 +21,7 @@ class Cow extends Model
 
     public function activityPlace()
     {
-        return $this->belongsTo(ActivityPlace::class);
+        return $this->belongsTo(ActivityPlace::class,'activityplace_id');
     }
     public function activitySystem()
     {

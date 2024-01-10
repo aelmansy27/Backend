@@ -10,12 +10,14 @@ class CowController extends Controller
 {
     public function index()
     {
-        $cows=Cow::paginate(10);
+        $cows = Cow::with('activityPlace')->get();
+
         return response([
-            'status'=>true,
-            $cows
+            'status' => true,
+            'cows' => $cows,
         ]);
     }
+
     public function show($id)
     {
         $cow=Cow::findOrFail($id);
@@ -27,9 +29,9 @@ class CowController extends Controller
 
     public function search(Request $request)
     {
-        $filter=$request->cow_id;
+        $filter=$request->cowId;
         $cow=Cow::query()
-            ->where('cow_id','LIKE',"%{$filter}%")
+            ->where('cowId','LIKE',"%{$filter}%")
             ->get();
         return response([
             'status'=>true,
