@@ -20,7 +20,7 @@ class CowController extends Controller
 
     public function show($id)
     {
-        $cow=Cow::findOrFail($id);
+        $cow=Cow::with('activityPlace')->findOrFail($id);
         return response([
            'status'=>true,
            $cow

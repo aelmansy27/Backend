@@ -20,7 +20,7 @@ class ActivityPlaceController extends Controller
 
     public function show($id)
     {
-        $activityplace=ActivityPlace::findOrFail($id);
+        $activityplace=ActivityPlace::with('cows')->withCount('cows')->findOrFail($id);
         return response([
            'status'=>true,
            $activityplace
