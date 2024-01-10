@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activity_systems', function (Blueprint $table) {
+        Schema::create('breading_systems', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('goal');
             $table->text('cause_of_creation');
-            $table->foreignId('breadingsystem_id');
-            $table->dateTimeTz('sleep_time')->nullable();
-            $table->dateTimeTz('wakeup_time')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activity_systems');
+        Schema::dropIfExists('breading_systems');
     }
 };

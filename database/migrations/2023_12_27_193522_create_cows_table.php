@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('activityplace_id');
             $table->foreignId('activitysystem_id');
+            $table->foreignId('breadingsystem_id');
             $table->string('original_area');
             $table->string('appearance');
             $table->enum('sex',['heifer','bull']);

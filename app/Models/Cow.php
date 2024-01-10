@@ -9,6 +9,7 @@ class Cow extends Model
 {
     use HasFactory;
 
+
     public function activityPlace()
     {
         return $this->belongsTo(ActivityPlace::class);
@@ -16,5 +17,10 @@ class Cow extends Model
     public function activitySystem()
     {
         return $this->belongsTo(ActivitySystem::class);
+    }
+
+    public function breadingSystem()
+    {
+        return $this->belongsTo(BreadingSystem::class);
     }
 }
