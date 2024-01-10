@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('eating_dates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activity_system_id');
+            $table->foreignId('cowfeed_id');
             $table->dateTimeTz('eating_start')->nullable();
             $table->dateTimeTz('eating_end')->nullable();
             $table->timestamps();

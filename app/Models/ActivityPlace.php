@@ -18,4 +18,9 @@ class ActivityPlace extends Model
     {
         return $this->hasMany(Cow::class);
     }
+
+    public function activitySystem()
+    {
+        return $this->belongsTo(ActivitySystem::class);
+    }
 }

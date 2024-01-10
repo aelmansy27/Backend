@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('activity_places', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('activitysystem_id');
+            $table->text('goal');
+            $table->longText('description');
             $table->integer('capacity');
             $table->dateTimeTz('antisepsis_date')->nullable();
             $table->string('type');
