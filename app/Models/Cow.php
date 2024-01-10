@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cow extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
     protected static function boot()
     {
@@ -17,12 +18,18 @@ class Cow extends Model
             $cow->cowId=sprintf("%06d",mt_rand(1,999999));
         });
     }
+
     public function activityPlace()
     {
-        return $this->belongsTo(ActivityPlace::class);
+        return $this->belongsTo(ActivityPlace::class,'activityplace_id');
     }
     public function activitySystem()
     {
         return $this->belongsTo(ActivitySystem::class);
+    }
+
+    public function breadingSystem()
+    {
+        return $this->belongsTo(BreadingSystem::class);
     }
 }

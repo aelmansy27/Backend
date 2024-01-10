@@ -14,11 +14,15 @@ class ActivitySystem extends Model
         return $this->hasMany(Cow::class);
     }
 
-    public function eatingDates()
+    public function breadingSystem()
     {
-        return $this->hasMany(EatingDate::class);
+        return $this->belongsTo(BreadingSystem::class);
     }
 
+    public function activityPlaces()
+    {
+        return $this->hasMany(ActivityPlace::class);
+    }
     public function walkingDates()
     {
         return $this->hasMany(WalkingDate::class);

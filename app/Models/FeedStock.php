@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EatingDate extends Model
+class FeedStock extends Model
 {
     use HasFactory;
 
-    public function cowFeed()
+    public function cowFeeds()
     {
-        return $this->belongsTo(CowFeed::class);
+        return $this->hasMany(CowFeed::class);
     }
 }

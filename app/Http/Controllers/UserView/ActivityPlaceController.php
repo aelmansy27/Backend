@@ -10,16 +10,17 @@ class ActivityPlaceController extends Controller
 {
     public function index()
     {
-        $activityplaces=ActivityPlace::all();
+        $activityPlaces = ActivityPlace::with('cows')->withCount('cows')->get();
+
         return response([
-            'status'=>true,
-            $activityplaces
+            'status' => true,
+            'activityPlaces' => $activityPlaces,
         ]);
     }
 
     public function show($id)
     {
-        $activityplace=ActivityPlace::findOrFail($id);
+        $activityplace=ActivityPlace::with('cows')->withCount('cows')->findOrFail($id);
         return response([
            'status'=>true,
            $activityplace

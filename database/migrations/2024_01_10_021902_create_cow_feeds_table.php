@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activity_systems', function (Blueprint $table) {
+        Schema::create('cow_feeds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('goal');
-            $table->text('cause_of_creation');
-            $table->foreignId('breadingsystem_id');
-            $table->dateTimeTz('sleep_time')->nullable();
-            $table->dateTimeTz('wakeup_time')->nullable();
+            $table->foreignId('user_id');
+            $table->foreignId('cow_id');
+            $table->foreignId('breadindsystem_id');
+            $table->foreignId('feedstock_id');
+            $table->decimal('amount');
+            $table->decimal('actual_amount');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activity_systems');
+        Schema::dropIfExists('cow_feeds');
     }
 };

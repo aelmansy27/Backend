@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('cows', function (Blueprint $table) {
             $table->id();
             $table->string('cowId',6)->unique();
-            $table->foreignId('activityplace_id');
+            $table->foreignId('activityplace_id')->constrained('activity_places');
             $table->foreignId('activitysystem_id');
+            $table->foreignId('breadingsystem_id');
             $table->string('original_area');
             $table->string('appearance');
             $table->enum('sex',['heifer','bull']);

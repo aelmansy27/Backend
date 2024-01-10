@@ -22,12 +22,14 @@ class CowFactory extends Factory
 
     public function definition(): array
     {
-        $activityPlaceId=1;
+        $activityPlaceId=ActivityPlace::inRandomOrder()->first()->id;;
         $activitySystemId=1;
+        $breadingSystemId=1;
         return [
             'cowId'=>sprintf("%06d",mt_rand(1,999999)),
             'activityplace_id'=>$activityPlaceId,
             'activitysystem_id'=>$activitySystemId,
+            'breadingsystem_id'=>$breadingSystemId,
             'original_area'=>$this->faker->word,
             'appearance'=>$this->faker->word,
             'sex'=>$this->faker->randomElement(['heifer','bull']),

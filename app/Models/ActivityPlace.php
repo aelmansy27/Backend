@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class ActivityPlace extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
     protected  $casts=[
         'type'=>ActivityType::class
@@ -16,6 +17,11 @@ class ActivityPlace extends Model
 
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->hasMany(Cow::class,'activityplace_id');
+    }
+
+    public function activitySystem()
+    {
+        return $this->belongsTo(ActivitySystem::class);
     }
 }

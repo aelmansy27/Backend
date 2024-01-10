@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
        Cow::factory(5)->create();
-        //ActivityPlace::factory(3)->create();
+       // ActivityPlace::factory(5)->create();
     }
 }
