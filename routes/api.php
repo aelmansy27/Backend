@@ -9,6 +9,7 @@ use App\Http\Controllers\UserView\ActivityPlaceController;
 use App\Http\Controllers\UserView\CowController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Stevebauman\Location\Facades\Location;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,22 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/cows',[CowController::class,'index']);
     Route::get('/cows/show/{id}',[CowController::class,'show'])->name('show_cow');
     Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
+    Route::get('/cows/update/{id}',[CowController::class,'updateLocation']);
 
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
 
+});
+
+    Route::get('/location',function (Request $request){
+        $ip = '156.197.167.0';; //Dynamic IP address
+        $cowLocation = Location::get($ip);
+        return response([
+            'status'=>true,
+            'lan'=>$cowLocation->latitude,
+            'lag'=>$cowLocation->longitude,
+            'country'=>$cowLocation->countryName,
+            'city'=>$cowLocation->cityName
+
+    ]);
 });
