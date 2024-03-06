@@ -23,4 +23,12 @@ class Cow extends Model
     {
         return $this->belongsTo(BreadingSystem::class);
     }
+
+    public function cowSensors(){
+        return $this->hasMany(CowSensor::class);
+    }
+
+    public function purpose(){
+        return $this->belongsTo(Purpose::class);
+    }
 }

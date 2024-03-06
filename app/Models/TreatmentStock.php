@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TreatmentStock extends Model
 {
     use HasFactory;
+
+    public function treatments(){
+        return $this->hasMany(Treatment::class);
+    }
 }

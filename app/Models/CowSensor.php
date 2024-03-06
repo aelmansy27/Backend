@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CowSensor extends Model
 {
     use HasFactory;
+
+    public function cow(){
+        return $this->belongsTo(Cow::class);
+    }
+
+    public function sensor(){
+        return $this->belongsTo(Sensor::class);
+    }
+
 }

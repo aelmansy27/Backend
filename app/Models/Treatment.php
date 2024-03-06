@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Treatment extends Model
 {
     use HasFactory;
+
+    public function treatmentStock(){
+        return $this->belongsTo(TreatmentStock::class);
+    }
+
+    public function treatmentDoseTimes(){
+        return $this->hasMany(TreatmentDoseTime::class);
+    }
 }
