@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cowId',6)->unique();
             $table->foreignId('activityplace_id');
+            $table->foreignId('activityplace_id')->constrained('activity_places');
             $table->foreignId('activitysystem_id');
             $table->foreignId('breadingsystem_id');
             $table->foreignId('purpose_id');
@@ -30,7 +31,15 @@ return new class extends Migration
             $table->decimal('latitude')->nullable();
             $table->decimal('longitude')->nullable();
             $table->boolean('cow_status')->default(true);
-
+            $table->decimal('milk_amount');
+            $table->decimal('heart_rate');
+            $table->decimal('pressure');
+            $table->decimal('temperature');
+            $table->decimal('sugar_rate');
+            $table->decimal('distance');
+            $table->decimal('jaw_movement_rate');
+            $table->decimal('movement_rate');
+            $table->boolean('cow_status')->default(true);
             $table->timestamps();
         });
     }
