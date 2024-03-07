@@ -14,18 +14,23 @@ return new class extends Migration
         Schema::create('cows', function (Blueprint $table) {
             $table->id();
             $table->string('cowId',6)->unique();
+            $table->foreignId('activityplace_id');
             $table->foreignId('activityplace_id')->constrained('activity_places');
             $table->foreignId('activitysystem_id');
             $table->foreignId('breadingsystem_id');
+            $table->foreignId('purpose_id');
             $table->string('original_area');
             $table->string('appearance');
-            $table->enum('sex',['heifer','bull']);
+            $table->string('image');
+            $table->enum('gender',['heifer','bull']);
             $table->dateTimeTz('entrance_date')->nullable();
             $table->dateTimeTz('age')->nullable();
-            $table->dateTimeTz('sleep_hour')->nullable();
-            $table->dateTimeTz('eating_duration')->nullable();
-            $table->dateTimeTz('laydown_duration')->nullable();
             $table->decimal('weight');
+            $table->decimal('milk_amount_morning')->nullable();
+            $table->decimal('milk_amount_afternoon')->nullable();
+            $table->decimal('latitude')->nullable();
+            $table->decimal('longitude')->nullable();
+            $table->boolean('cow_status')->default(true);
             $table->decimal('milk_amount');
             $table->decimal('heart_rate');
             $table->decimal('pressure');

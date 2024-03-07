@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activity_places', function (Blueprint $table) {
+        Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activitysystem_id');
-            $table->text('goal');
-            $table->longText('description');
-            $table->integer('capacity');
-            $table->string('type');
+            $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activity_places');
+        Schema::dropIfExists('sensors');
     }
 };
