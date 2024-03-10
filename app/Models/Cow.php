@@ -21,7 +21,7 @@ class Cow extends Model
 
     public function activityPlace()
     {
-        return $this->belongsTo(ActivityPlace::class,'activityplace_id');
+        return $this->belongsTo(ActivityPlace::class);
     }
     public function activitySystem()
     {
@@ -31,5 +31,13 @@ class Cow extends Model
     public function breadingSystem()
     {
         return $this->belongsTo(BreadingSystem::class);
+    }
+
+    public function cowSensors(){
+        return $this->hasMany(CowSensor::class);
+    }
+
+    public function purpose(){
+        return $this->belongsTo(Purpose::class);
     }
 }

@@ -43,7 +43,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
 
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
-
+    Route::get('/activity_places/search',[ActivityPlaceController::class,'searchPlace'])->name('find_place');
 });
 
     Route::get('/location',function (Request $request){

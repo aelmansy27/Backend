@@ -30,7 +30,7 @@ class CowController extends Controller
     }
 
     public function search(Request $request)
-    {
+    {/*
         $filter=$request->cowId;
         $cow=Cow::query()
             ->where('cowId','LIKE',"%{$filter}%")
@@ -38,6 +38,31 @@ class CowController extends Controller
         return response([
             'status'=>true,
             $cow
+        ]);
+*/
+        $filter = $request->cowId;
+
+        // Assuming there's a relationship between Cow and ActivityPlace
+        $cow = Cow::where('cowId', 'LIKE',"%{$filter}%")->first(); // Assuming cowId is unique
+        if (!$cow) {
+            return response([
+                'status' => false,
+                'message' => 'Cow not found'
+            ], 404);
+        }
+
+        $activityPlaces = $cow->activityPlace; // Assuming activityPlace is the relationship
+
+        if (!$activityPlaces) {
+            return response([
+                'status' => false,
+                'message' => 'Activity place not found for this cow'
+            ], 404);
+        }
+
+        return response([
+            'status' => true,
+            'cow'=>$cow,
         ]);
     }
 

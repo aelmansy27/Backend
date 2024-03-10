@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\ActivityPlace;
 use App\Models\ActivitySystem;
 use App\Models\Cow;
+use App\Models\Purpose;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +22,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        //ActivityPlace::factory(5)->create();
+        ActivityPlace::factory(5)->create();
+        Purpose::factory(5)->create();
         Cow::factory(5)->create();
+
     }
 }

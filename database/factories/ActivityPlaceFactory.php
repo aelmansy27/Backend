@@ -21,11 +21,10 @@ class ActivityPlaceFactory extends Factory
     {
         $activitySystemId=1;
         return [
-            'activitysystem_id'=>$activitySystemId,
+            'activity_system_id'=>$activitySystemId,
             'goal'=>$this->faker->text,
             'description'=>$this->faker->text,
             'capacity'=>$this->faker->numberBetween(5,50),
-            'antisepsis_date'=>$this->faker->dateTime(),
             'type'=>$this->faker->randomElement(ActivityType::cases()),
         ];
     }
