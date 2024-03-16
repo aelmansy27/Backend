@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ResetPasswordWithPhoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,9 @@ Route::post('/register',[RegisterController::class,'register']);
 Route::post('/login',[LoginController::class,'login']);
 Route::post('password/forget-password',[ForgetPasswordController::class,'forgetPassword']);
 Route::post('password/reset',[ResetPasswordController::class,'resetPassword']);
+Route::post('password/forget-password',[ResetPasswordWithPhoneController::class,'forgetPassword']);
+Route::post('password/reset',[ResetPasswordWithPhoneController::class,'resetPassword']);
+
 
 //protected routes
 Route::group(['middleware'=>['auth:sanctum']],function (){
