@@ -8,7 +8,7 @@ use App\Models\ActivityPlace;
 use App\Models\Cow;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Log;
+
 
 class ActivityPlaceController extends Controller
 {
@@ -40,18 +40,25 @@ class ActivityPlaceController extends Controller
 
     public function searchPlace(Request $request)
     {
-        $filter= $request->type;
 
-        // Assuming there's a relationship between Cow and ActivityPlace
-        $place = ActivityPlace::where('type','LIKE',"%{$filter}%")->first(); // Assuming cowId is unique
+        $filter = $request->type; // Assuming $request is available in your controller method
+
+
+        $place = ActivityPlace::where('type','LIKE', "%{$filter}%")// Eager loading (optional)
+            ->first();
+
+        // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
+        //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
+
         if (!$place) {
+
             return response([
                 'status' => false,
                 'message' => 'Activity place not found'
             ], 404);
         }
 
-        $cow = $place->cows; // Assuming activityPlace is the relationship
+       $cow = $place->cows; // Assuming activityPlace is the relationship
 
         if (!$cow) {
             return response([
@@ -59,11 +66,12 @@ class ActivityPlaceController extends Controller
                 'message' => 'cows not found for this activity place'
             ], 404);
         }
-
         return response([
             'status' => true,
-            'activityPlace' => $cow
+            'activityPlace' => $place,
+            'cows'=>$cow->count()
         ]);
+
     }
 
 

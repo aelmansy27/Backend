@@ -30,16 +30,7 @@ class CowController extends Controller
     }
 
     public function search(Request $request)
-    {/*
-        $filter=$request->cowId;
-        $cow=Cow::query()
-            ->where('cowId','LIKE',"%{$filter}%")
-            ->get();
-        return response([
-            'status'=>true,
-            $cow
-        ]);
-*/
+    {
         $filter = $request->cowId;
 
         // Assuming there's a relationship between Cow and ActivityPlace

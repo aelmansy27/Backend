@@ -11,9 +11,6 @@ class ActivityPlace extends Model
     use HasFactory;
     protected $guarded=[];
 
-    protected  $casts=[
-        'type'=>ActivityType::class
-    ];
 
     public function cows()
     {
@@ -24,4 +21,7 @@ class ActivityPlace extends Model
     {
         return $this->belongsTo(ActivitySystem::class);
     }
+    protected  $casts=[
+        'type'=>ActivityType::class
+    ];
 }

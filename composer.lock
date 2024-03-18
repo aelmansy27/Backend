@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f23f205e691a70621bebf9fb7658a522",
+    "content-hash": "438dd47fa28a4e78f14e5b8627bfb90e",
     "packages": [
         {
             "name": "brick/math",
@@ -3398,29 +3398,29 @@
         },
         {
             "name": "stevebauman/location",
-            "version": "v7.1.4",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevebauman/location.git",
-                "reference": "b9cadaf84322d19c08deac82ffded86c7a07dfb0"
+                "reference": "969303a569453b4a00ca43349101c80ea87f65d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/location/zipball/b9cadaf84322d19c08deac82ffded86c7a07dfb0",
-                "reference": "b9cadaf84322d19c08deac82ffded86c7a07dfb0",
+                "url": "https://api.github.com/repos/stevebauman/location/zipball/969303a569453b4a00ca43349101c80ea87f65d3",
+                "reference": "969303a569453b4a00ca43349101c80ea87f65d3",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "geoip2/geoip2": "^2.0",
-                "illuminate/support": "^8.0|^9.0|^10.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
                 "php": ">=8.1"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^6.0|^7.0|^8.0",
-                "pestphp/pest": "^1.21"
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.0|^2.0"
             },
             "type": "library",
             "extra": {
@@ -3460,9 +3460,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stevebauman/location/issues",
-                "source": "https://github.com/stevebauman/location/tree/v7.1.4"
+                "source": "https://github.com/stevebauman/location/tree/v7.2.0"
             },
-            "time": "2024-01-29T04:42:48+00:00"
+            "time": "2024-03-12T15:43:20+00:00"
         },
         {
             "name": "symfony/console",
