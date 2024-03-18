@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\UserView\ActivityPlaceController;
 use App\Http\Controllers\UserView\CowController;
+use App\Http\Controllers\UserView\EditUserDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Stevebauman\Location\Facades\Location;
@@ -44,6 +45,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
+
+    Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });
 
 
