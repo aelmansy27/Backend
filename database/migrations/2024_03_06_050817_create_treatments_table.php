@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cow_id');
-            $table->foreignId('treatmentstock_id');
+            $table->foreignId('treatment_stock_id');
             $table->text('disease');
             $table->decimal('doses');
             $table->text('diagnose');
