@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Aloha\Twilio\Twilio;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Twilio\Rest\Client;
 
 class ResetPasswordWithPhoneController extends Controller
 {
     public function forgetPassword(Request $request)
     {
 
-        $user = User::where('phone', $request->input('phone'))->first();
-
+        //$user = User::where('phone', $request->input('phone'))->first();
+        $input=$request->only('phone');
+        $user=User::where('phone',$input)->first();
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
@@ -45,7 +46,8 @@ class ResetPasswordWithPhoneController extends Controller
         }
 
         // Reset password
-        $user->password = Hash::make($request->input('password'));
+        $user->update(['password'=>Hash::make($request->password)]);
+        //$user->password = Hash::make($request->input('password'));
         $verificationCode = null;
         $user->save();
 
