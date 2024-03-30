@@ -26,6 +26,8 @@ class ActivityPlaceFactory extends Factory
             'description'=>$this->faker->text,
             'capacity'=>$this->faker->numberBetween(5,50),
             'type'=>$this->faker->randomElement(ActivityType::cases()),
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
         ];
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->longText('description');
             $table->integer('capacity');
             $table->string('type');
+            $table->decimal('latitude')->nullable();
+            $table->decimal('longitude')->nullable();
             $table->timestamps();
         });
     }
