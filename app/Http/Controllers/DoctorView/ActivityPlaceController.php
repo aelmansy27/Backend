@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\UserView;
+namespace App\Http\Controllers\DoctorView;
 
 
 use App\Http\Controllers\Controller;

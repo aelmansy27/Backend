@@ -8,9 +8,9 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\Auth\ResetPasswordWithPhoneController;
 
-use App\Http\Controllers\UserView\ActivityPlaceController;
-use App\Http\Controllers\UserView\CowController;
-use App\Http\Controllers\UserView\EditUserDataController;
+use App\Http\Controllers\DoctorView\ActivityPlaceController;
+use App\Http\Controllers\DoctorView\CowController;
+use App\Http\Controllers\DoctorView\EditUserDataController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
