@@ -21,7 +21,7 @@ class ActivityPlaceFactory extends Factory
     {
         $activitySystemId=1;
         return [
-            'activity_system_id'=>$activitySystemId,
+            'activitysystem_id'=>$activitySystemId,
             'goal'=>$this->faker->text,
             'description'=>$this->faker->text,
             'capacity'=>$this->faker->numberBetween(5,50),

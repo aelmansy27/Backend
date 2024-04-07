@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\DoctorView;
 
 
+use App\Enums\ActivityType;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\EnsureUserIsDoctor;
 use App\Models\ActivityPlace;
 use App\Models\Cow;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Enum;
 
 
 class ActivityPlaceController extends Controller
@@ -27,14 +31,14 @@ class ActivityPlaceController extends Controller
 
     public function show($id)
     {
-        $activityplace=ActivityPlace
+        $activityplace = ActivityPlace
             ::with('cows')
             ->withCount('cows')
             ->findOrFail($id);
 
         return response([
-           'status'=>true,
-           $activityplace
+            'status' => true,
+            $activityplace
         ]);
     }
 
@@ -44,8 +48,8 @@ class ActivityPlaceController extends Controller
         $filter = $request->type; // Assuming $request is available in your controller method
 
 
-        $place = ActivityPlace::where('type','LIKE', "%{$filter}%")// Eager loading (optional)
-            ->first();
+        $place = ActivityPlace::where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
+        ->first();
 
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
         //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
@@ -58,7 +62,7 @@ class ActivityPlaceController extends Controller
             ], 404);
         }
 
-       $cow = $place->cows; // Assuming activityPlace is the relationship
+        $cow = $place->cows; // Assuming activityPlace is the relationship
 
         if (!$cow) {
             return response([
@@ -69,7 +73,7 @@ class ActivityPlaceController extends Controller
         return response([
             'status' => true,
             'activityPlace' => $place,
-            'cows'=>$cow->count()
+            'cows' => $cow->count()
         ]);
 
     }

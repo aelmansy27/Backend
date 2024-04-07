@@ -17,7 +17,7 @@ class EnsureUserIsDoctor
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(Auth::user()->makeVisible('is_doctor')){
+        if(Auth::user()->is_doctor){
 
            return $next($request);
         }else{

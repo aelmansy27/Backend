@@ -41,7 +41,7 @@ Route::post('reset-with-phone',[ResetPasswordWithPhoneController::class,'resetPa
 
 
 //protected routes
-Route::group(['middleware'=>['auth:sanctum']],function (){
+Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::post('/logout',[LogoutController::class,'logout']);
     //cow routes
     Route::get('/cows',[CowController::class,'index']);
@@ -52,6 +52,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
+
 
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });

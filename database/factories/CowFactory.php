@@ -29,9 +29,9 @@ class CowFactory extends Factory
         $purposeId=Purpose::inRandomOrder()->first()->id;
         return [
             'cowId'=>sprintf("%06d",mt_rand(1,999999)),
-            'activity_place_id'=>$activityPlaceId,
-            'activity_system_id'=>$activitySystemId,
-            'breading_system_id'=>$breadingSystemId,
+            'activityplace_id'=>$activityPlaceId,
+            'activitysystem_id'=>$activitySystemId,
+            'breadingsystem_id'=>$breadingSystemId,
             'purpose_id'=>$purposeId,
             'original_area'=>$this->faker->word,
             'appearance'=>$this->faker->word,
