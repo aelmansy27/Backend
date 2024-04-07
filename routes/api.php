@@ -12,6 +12,7 @@ use App\Http\Controllers\DoctorView\ActivityPlaceController;
 use App\Http\Controllers\DoctorView\CowController;
 use App\Http\Controllers\DoctorView\EditUserDataController;
 
+use App\Http\Controllers\DoctorView\TreatmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Stevebauman\Location\Facades\Location;
@@ -53,6 +54,8 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
 
+    Route::get('/treatments/all',[TreatmentController::class,'index']);
+    Route::get('/treatments/show/{id}',[TreatmentController::class,'show']);
 
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });
