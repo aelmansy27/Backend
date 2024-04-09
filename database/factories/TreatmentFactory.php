@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Cow;
+use App\Models\Treatment;
+use App\Models\TreatmentDoseTimes;
 use App\Models\TreatmentStock;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,6 +18,7 @@ class TreatmentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model=Treatment::class;
     public function definition(): array
     {
         return [

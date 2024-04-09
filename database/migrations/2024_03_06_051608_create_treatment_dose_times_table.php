@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('treatment_id');
             $table->dateTimeTz('date');
+            $table->boolean('is_taken');
             $table->timestamps();
         });
     }

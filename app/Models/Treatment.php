@@ -14,6 +14,6 @@ class Treatment extends Model
     }
 
     public function treatmentDoseTimes(){
-        return $this->hasMany(TreatmentDoseTime::class);
+        return $this->hasMany(TreatmentDoseTimes::class);
     }
 }
