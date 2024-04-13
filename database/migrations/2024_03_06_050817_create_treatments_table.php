@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cow_id');
-            $table->foreignId('treatmentstock_id');
+            $table->string('name');
+            $table->foreignId('treatmentstock_id'); //name of treatment stock that contain name + dose as gm + type as method
             $table->text('disease');
-            $table->decimal('doses');
-            $table->text('diagnose');
-            $table->string('method');
+            $table->integer('doses'); //counter
+            $table->longText('diagnose');  // maybe in additional info
             $table->timestamps();
         });
     }

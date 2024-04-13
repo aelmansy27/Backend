@@ -23,11 +23,12 @@ class TreatmentFactory extends Factory
     {
         return [
             'cow_id' => Cow::inRandomOrder()->first()->id,
+            'name'=>$this->faker->sentence(),
             'treatmentstock_id' => TreatmentStock::inRandomOrder()->first()->id,
             'disease' => $this->faker->sentence(),
-            'doses' => $this->faker->randomFloat(2, 0, 100), // Example random decimal between 0 and 100
+            'doses' => $this->faker->randomNumber(2), // Example random decimal between 0 and 100
             'diagnose' => $this->faker->paragraph(),
-            'method' => $this->faker->word(),
+
         ];
     }
 }
