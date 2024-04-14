@@ -40,4 +40,8 @@ class Cow extends Model
     public function purpose(){
         return $this->belongsTo(Purpose::class);
     }
+
+    public function treatments(){
+        return $this->hasMany(Treatment::class);
+    }
 }
