@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cow;
 use App\Models\Treatment;
 use App\Models\TreatmentStock;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,5 +85,66 @@ class TreatmentController extends Controller
                 'diagnose' => $treatment->diagnose,
             ],
         ], 201);
+    }
+
+    public function edit($id,Request $request){
+        $validator=Validator::make($request->all(),[
+           'name'=>'required|string',
+            'search_term'=>'required|string',
+            'disease'=>'required|string',
+            'doses'=>'integer',
+            'diagnose'=>'string|nullable'
+        ]);
+        if($validator->fails()){
+            return response()->json(['message'=>$validator->errors()->first()],400);
+        }
+
+        $treatment=Treatment::findOrFail($id);
+
+        $treatment->name=$request->name;
+        if($request->has('search_term')){
+            $parts=explode(' ',$request->search_term);
+            if(!empty($parts)){
+                $name=$parts[0];
+                $type=isset($parts[1]) ? $parts[1] : null;
+                $treatmentStock=TreatmentStock::where('name', $name)
+                    ->where('type',$type)
+                    ->first();
+
+                if(!$treatmentStock){
+                    return response()->json(['message'=>'Treatment not found']);
+                }
+                $treatment->name=$request->name;
+                $treatment->treatmentstock_id=$treatmentStock->id;
+            }else{
+                return response()->json(['message'=>'Invalid search term']);
+            }
+        }
+        $treatment->disease = $request->disease;
+
+        if (isset($request->doses)) {
+            $treatment->doses = $request->doses;
+        }
+
+        $treatment->diagnose = $request->diagnose;
+
+        $treatment->save();
+
+        $treatmentData = [
+            'id' => $treatment->id,
+            'cow_id' => $treatment->cow_id,
+            'name' => $treatment->name, // Updated name if search term was used
+            'treatmentstock_id'=>$treatment->treatmentstock_id,
+            'disease' => $treatment->disease,
+            'doses' => $treatment->doses,
+            'diagnose' => $treatment->diagnose,
+        ];
+
+        return response()->json([
+            'message' => 'Treatment updated successfully!',
+            'treatment' => $treatmentData,
+        ]);
+
+
     }
 }

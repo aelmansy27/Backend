@@ -57,7 +57,7 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('/treatments/all',[TreatmentController::class,'index']);
     Route::get('/treatments/show/{id}',[TreatmentController::class,'show']);
     Route::post('cow/{cow}/treatment/create',[TreatmentController::class,'create']);
-
+    Route::post('treatment/{id}/edit',[TreatmentController::class,'edit']);
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });
 
