@@ -14,7 +14,7 @@ class TreatmentController extends Controller
 {
     public function index(Request $request)
     {
-        $treatments = Treatment::all();
+        $treatments = Treatment::with('treatmentDoseTimes')->get();
 
         return response([
             'status' => true,
@@ -23,7 +23,8 @@ class TreatmentController extends Controller
     }
 
     public function show($id){
-        $treatment=Treatment::findOrFail($id);
+        $treatment=Treatment::with('treatmentDoseTimes')->findOrFail($id);
+
         return response([
             'status'=>true,
             'treatment'=>$treatment
