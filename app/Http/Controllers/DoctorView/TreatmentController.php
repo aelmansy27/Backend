@@ -5,26 +5,34 @@ namespace App\Http\Controllers\DoctorView;
 use App\Http\Controllers\Controller;
 use App\Models\Cow;
 use App\Models\Treatment;
+use App\Models\TreatmentDoseTimes;
 use App\Models\TreatmentStock;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use function Symfony\Component\Translation\t;
 
 class TreatmentController extends Controller
 {
-    public function index(Request $request)
+    public function index(Cow $cow)
     {
-        $treatments = Treatment::with('treatmentDoseTimes')->get();
+        $retrievedCow = $cow->load('treatments.treatmentDoseTimes');  // Eager load treatments using route model binding
 
-        return response([
+        if (!$retrievedCow) {
+            return response()->json(['message' => 'Cow not found'], 404);
+        }
+
+        return response()->json([
             'status' => true,
-            'treatments' => $treatments,
+            'treatments' => $retrievedCow->treatments,
         ]);
+
     }
 
-    public function show($id){
-        $treatment=Treatment::with('treatmentDoseTimes')->findOrFail($id);
+    public function show(Cow $cow,$id){
+        $treatment=Treatment::where('cow_id',$cow->id)->findOrFail($id);
 
+        $treatment->load('treatmentDoseTimes');
         return response([
             'status'=>true,
             'treatment'=>$treatment
