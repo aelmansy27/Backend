@@ -21,7 +21,8 @@ class TreatmentDoseTimesFactory extends Factory
     {
         return [
             'treatment_id'=>Treatment::inRandomOrder()->first()->id,
-            'date'=>$this->faker->dateTimeThisMonth(),
+            'date'=>$this->faker->date(),
+            'time'=>$this->faker->time(),
             'is_taken'=>$this->faker->boolean
         ];
     }
