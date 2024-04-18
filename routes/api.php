@@ -57,6 +57,7 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
     Route::get('activity_place/{activityPlace}/filter-by-cow-status',[ActivityPlaceController::class,'filterByCowStatus']);
+    Route::get('activity_place/filter-by-type',[ActivityPlaceController::class,'filterByType']);
 
     Route::get('cow/{cow}/treatments/all',[TreatmentController::class,'index']);
     Route::get('cow/{cow}/treatments/show/{id}',[TreatmentController::class,'show']);

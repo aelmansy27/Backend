@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\EnsureUserIsDoctor;
 use App\Models\ActivityPlace;
 use App\Models\Cow;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
@@ -97,5 +98,20 @@ class ActivityPlaceController extends Controller
 
     }
 
+    public function filterByType(Request $request){
+        $validator=Validator::make($request->all(),[
+            'type'=>'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $type = $request->get('type');
+
+        $activityPlaces = ActivityPlace::where('type', $type)->get();
+
+        return response()->json($activityPlaces);
+    }
 
 }
