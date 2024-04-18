@@ -125,4 +125,22 @@ class CowController extends Controller
 
     return response()->json($calves);
     }
+
+    public function filterCowByStatus(Request $request){
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $status = $request->get('status');
+
+
+        $cows = Cow::where('cow_status', $status)
+            ->get() ;
+
+        return response()->json($cows, 200);
+    }
 }

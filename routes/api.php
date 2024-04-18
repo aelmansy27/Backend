@@ -51,10 +51,12 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
     Route::get('/cows/update/{id}',[CowController::class,'updateLocation']);
     Route::get('cows/filter-by-age',[CowController::class,'filterCowByAge']);
+    Route::get('cows/filter-by-status',[CowController::class,'filterCowByStatus']);
 
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
+    Route::get('activity_place/{activityPlace}/filter-by-cow-status',[ActivityPlaceController::class,'filterByCowStatus']);
 
     Route::get('cow/{cow}/treatments/all',[TreatmentController::class,'index']);
     Route::get('cow/{cow}/treatments/show/{id}',[TreatmentController::class,'show']);

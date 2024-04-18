@@ -78,5 +78,24 @@ class ActivityPlaceController extends Controller
 
     }
 
+    public function filterByCowStatus(Request $request,ActivityPlace $activityPlace){
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $status = $request->get('status');
+
+
+        $cows = Cow::where('activityplace_id',$activityPlace->id)
+            ->where('cow_status', $status)
+            ->get() ;
+        return response()->json($cows, 200);
+
+    }
+
 
 }
