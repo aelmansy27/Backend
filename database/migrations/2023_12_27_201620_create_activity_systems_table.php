@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('goal');
             $table->text('cause_of_creation');
-            $table->foreignId('breadingsystem_id');
+            $table->foreignId('breading_system_id');
             $table->dateTimeTz('sleep_time')->nullable();
             $table->dateTimeTz('wakeup_time')->nullable();
             $table->timestamps();

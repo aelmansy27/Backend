@@ -45,11 +45,11 @@ class ActivityPlaceController extends Controller
         $filter = $request->type; // Assuming $request is available in your controller method
 
 
-        $place = ActivityPlace::where('type','LIKE', "%{$filter}%")// Eager loading (optional)
-            ->first();
+        $query= ActivityPlace::with('cows');// Eager loading (optional)
+
 
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
-        //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
+        $place = $query->where('type', 'LIKE','%'.$filter.'%')->get();
 
         if (!$place) {
 
@@ -59,20 +59,19 @@ class ActivityPlaceController extends Controller
             ], 404);
         }
 
-       $cow = $place->cows; // Assuming activityPlace is the relationship
+        // Assuming activityPlace is the relationship
 
-        if (!$cow) {
+        /*if (!$cow) {
             return response([
                 'status' => false,
                 'message' => 'cows not found for this activity place'
             ], 404);
-        }
+        }*/
         return response([
             'status' => true,
-            'activityPlace' => $place,
-            'cows'=>$cow->count()
-        ]);
+            'activity places' => $place,
 
+        ]);
     }
 
     public function filterByCowStatus(Request $request,ActivityPlace $activityPlace){
@@ -87,7 +86,7 @@ class ActivityPlaceController extends Controller
         $status = $request->get('status');
 
 
-        $cows = Cow::where('activityplace_id',$activityPlace->id)
+        $cows = Cow::where('activity_place_id',$activityPlace->id)
             ->where('cow_status', $status)
             ->get() ;
         return response()->json($cows, 200);
