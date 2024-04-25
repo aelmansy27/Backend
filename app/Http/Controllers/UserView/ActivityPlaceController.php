@@ -41,12 +41,8 @@ class ActivityPlaceController extends Controller
 
     public function searchPlace(Request $request)
     {
-
         $filter = $request->type; // Assuming $request is available in your controller method
-
-
         $query= ActivityPlace::with('cows');// Eager loading (optional)
-
 
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
         $place = $query->where('type', 'LIKE','%'.$filter.'%')->get();
@@ -88,7 +84,7 @@ class ActivityPlaceController extends Controller
 
         $cows = Cow::where('activity_place_id',$activityPlace->id)
             ->where('cow_status', $status)
-            ->get() ;
+            ->get();
         return response()->json($cows, 200);
 
     }

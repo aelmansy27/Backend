@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "3a59706bd11c454faf30bd55761bb89a",
-
-    "content-hash": "438dd47fa28a4e78f14e5b8627bfb90e",
-
+    "content-hash": "3495abef3a9ec6ce704018374c0f9bd6",
     "packages": [
         {
             "name": "aloha/twilio",
@@ -1180,16 +1176,16 @@
         },
         {
             "name": "ichtrojan/laravel-otp",
-            "version": "v1.4.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ichtrojan/laravel-otp.git",
-                "reference": "ff8353ddfe40ca8ada7a312a7408658197f47105"
+                "reference": "0c12316ccf6f051cac81d6be418ad6f68689d4b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ichtrojan/laravel-otp/zipball/ff8353ddfe40ca8ada7a312a7408658197f47105",
-                "reference": "ff8353ddfe40ca8ada7a312a7408658197f47105",
+                "url": "https://api.github.com/repos/ichtrojan/laravel-otp/zipball/0c12316ccf6f051cac81d6be418ad6f68689d4b9",
+                "reference": "0c12316ccf6f051cac81d6be418ad6f68689d4b9",
                 "shasum": ""
             },
             "type": "library",
@@ -1221,9 +1217,9 @@
             "description": "A simple package to generate and validate OTPs",
             "support": {
                 "issues": "https://github.com/ichtrojan/laravel-otp/issues",
-                "source": "https://github.com/ichtrojan/laravel-otp/tree/v1.4.2"
+                "source": "https://github.com/ichtrojan/laravel-otp/tree/v2.0.0"
             },
-            "time": "2023-09-16T14:45:34+00:00"
+            "time": "2023-12-24T22:16:55+00:00"
         },
         {
             "name": "laravel/framework",
