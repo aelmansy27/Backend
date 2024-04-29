@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('type',['temperature','heart rate','movement rate']);
             $table->string('code');
             $table->timestamps();
         });

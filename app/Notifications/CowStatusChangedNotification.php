@@ -2,33 +2,22 @@
 
 namespace App\Notifications;
 
-
-use Ichtrojan\Otp\Otp;
-
+use App\Models\Cow;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ResetPasswordNotification extends Notification implements ShouldQueue
+class CowStatusChangedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    public $message;
-    public $subject;
-    public $fromEmail;
-    public $mailer;
-    private $otp;
-
+    protected $cows;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(array $cows)
     {
-        $this->message='Use the below code for reseting your password';
-        $this->subject='Password reseting';
-        $this->fromEmail='halaibrahim867@gmail.com';
-        $this->mailer='smtp';
-        $this->otp=new Otp();
+        $this->cows = $cows;
     }
 
     /**
@@ -46,13 +35,15 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $otp=$this->otp->generate($notifiable->email,6,60);
-        return (new MailMessage)
-                    ->mailer('smtp')
-                    ->subject($this->subject)
-                    ->greeting('Hello '.$notifiable->first_name)
-                    ->line($this->message)
-                    ->line('code '.$otp->token);
+        $mailMessage = (new MailMessage)
+            ->subject('Cow Status Changed')
+            ->line('The status of the following cows has changed:');
+
+        foreach ($this->cows as $cow) {
+            $mailMessage->line('Cow ID: ' . $cow->cowId . ', Status: ' . $cow->cow_status);
+        }
+
+        return $mailMessage;
     }
 
     /**

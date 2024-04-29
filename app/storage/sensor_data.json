@@ -1,0 +1,102 @@
+[
+    {
+        "cow_id": 1,
+        "sensor_readings": [
+            {
+                "type": "temperature",
+                "value": 39.5,
+                "sensor_id": 3
+            },
+            {
+                "type": "heart rate",
+                "value": 90,
+                "sensor_id": 3
+            },
+            {
+                "type": "movement rate",
+                "value": 10,
+                "sensor_id": 1
+            }
+        ]
+    },
+    {
+        "cow_id": 2,
+        "sensor_readings": [
+            {
+                "type": "temperature",
+                "value": 38.7,
+                "sensor_id": 5
+            },
+            {
+                "type": "heart rate",
+                "value": 90,
+                "sensor_id": 4
+            },
+            {
+                "type": "movement rate",
+                "value": 10,
+                "sensor_id": 7
+            }
+        ]
+    },
+    {
+        "cow_id": 3,
+        "sensor_readings": [
+            {
+                "type": "temperature",
+                "value": 40.2,
+                "sensor_id": 6
+            },
+            {
+                "type": "heart rate",
+                "value": 75,
+                "sensor_id": 7
+            },
+            {
+                "type": "movement rate",
+                "value": 20,
+                "sensor_id": 10
+            }
+        ]
+    },
+    {
+        "cow_id": 4,
+        "sensor_readings": [
+            {
+                "type": "temperature",
+                "value": 39.0,
+                "sensor_id": 9
+            },
+            {
+                "type": "heart rate",
+                "value": 77,
+                "sensor_id": 14
+            },
+            {
+                "type": "movement rate",
+                "value": 18,
+                "sensor_id": 11
+            }
+        ]
+    },
+    {
+        "cow_id": 5,
+        "sensor_readings": [
+            {
+                "type": "temperature",
+                "value": 39.8,
+                "sensor_id": 12
+            },
+            {
+                "type": "heart rate",
+                "value": 10,
+                "sensor_id": 19
+            },
+            {
+                "type": "movement rate",
+                "value": 18,
+                "sensor_id": 17
+            }
+        ]
+    }
+]

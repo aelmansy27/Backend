@@ -10,9 +10,12 @@
         "guzzlehttp/guzzle": "^7.2",
         "ichtrojan/laravel-otp": "^1.4",
         "laravel/framework": "^10.10",
+        "laravel/reverb": "@beta",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "stevebauman/location": "^7.2"
+        "stevebauman/location": "^7.2",
+        "symfony/http-client": "^7.0",
+        "symfony/mailgun-mailer": "^7.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

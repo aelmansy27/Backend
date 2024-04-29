@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cow_id');
             $table->foreignId('sensor_id');
+            $table->decimal('values')->nullable();
             $table->timestamps();
         });
     }

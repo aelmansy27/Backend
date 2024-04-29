@@ -1,0 +1,168 @@
+<?php
+
+namespace App\Http\Controllers\DoctorView;
+
+use App\Http\Controllers\Controller;
+use App\Models\Cow;
+use App\Models\CowSensor;
+use App\Models\Sensor;
+
+use App\Notifications\CowStatusChangedNotification;
+use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+
+class SensorReadingController extends Controller
+{
+    public function index(){
+        $sensor=Sensor::all();
+        return response()->json($sensor);
+    }
+
+  /*  public function readingSensor()
+    {
+        $fakeData = File::get(base_path('app/storage/sensor_data.json'));
+        $sensorData = json_decode($fakeData, true);
+        $changedCows = [];
+
+        foreach ($sensorData as $data) {
+            /*$existingSensorReading = CowSensor::where('cow_id', $data['cow_id'])
+                ->where('sensor_id', $data['sensor_id'])
+                ->where('values', $data['value'])
+                ->exists();
+
+            if (!$existingSensorReading) {
+                // Save sensor reading to the database
+                $cowSensor = CowSensor::create([
+                    'cow_id' => $data['cow_id'],
+                    'sensor_id' => $data['sensor_id'],
+                    'values' => $data['value'],
+                ]);
+            }
+
+            // Update cow status based on sensor reading
+            $cow = Cow::findOrFail($data['cow_id']);
+            dd($cow);
+            if ($cow) {
+                $previousStatus = $cow->cow_status;
+                if ((($data['type'] == 'temperature' && $data['value'] > 38.5) &&
+                        ($data['type'] == 'heart rate' && ($data['value'] > 80 || $data['value'] < 70))) ||
+                    (($data['type'] == 'temperature' && $data['value'] > 38.5) &&
+                        ($data['type'] == 'movement rate' && ($data['value'] > 25 || $data['value'] < 15)))) {
+                    $cow->cow_status = 0; // Assuming status 0 means abnormal
+                } else {
+                    $cow->cow_status = 1; // Assuming status 1 means normal
+                }
+            } else {
+                continue;
+            }
+
+
+            // Save the cow status if it has changed
+
+            if ($cow->cow_status != $previousStatus) {
+                $cow->update();
+                $changedCows[] = $cow;
+
+                // Send notification to currently authenticated doctor
+                $doctor = Auth::user(); // Assuming the currently authenticated user is a doctor
+                $doctor->notify(new CowStatusChangedNotification($cow));
+            }
+
+            /* // Send notifications to doctors for changed cow status
+             foreach ($changedCows as $changedCow) {
+                 // Assuming you have a relationship between Doctor and Cow
+                 $doctors = $changedCow->auth()->user->get(); // Adjust this according to your actual relationship
+                 foreach ($doctors as $doctor) {
+                     $doctor->notify(new CowStatusChangedNotification($changedCow));
+                 }
+             }
+
+            // Return the list of cows whose status has changed
+            return response()->json(['changed_cows' => $changedCows]);
+        }
+    }
+*/
+
+
+    public function readingSensor()
+    {
+        $fakeData = File::get(base_path('app/storage/sensor_data.json'));
+        $sensorData = json_decode($fakeData, true);
+        //dd($sensorData);
+        $changedCows = [];
+
+        foreach ($sensorData as $cowData) {
+            //dd($data);
+            // Check if the sensor reading is within the specified range
+            //if ($this->isReadingOutOfRange($data)) {
+                // Update cow status based on sensor reading
+                $cow = Cow::find($cowData['cow_id']);
+                //dd($cow);
+                if ($cow) {
+                    $previousStatus = $cow->cow_status;
+                     //dd($previousStatus);
+                    $abnormalCount=0;
+                    foreach ($cowData['sensor_readings'] as $data) {
+                        if($data['type'] == 'temperature' && $data['value'] > 38.5) {
+                            $abnormalCount++;
+                        }
+
+                        // Check heart rate
+                        if ($data['type'] == 'heart rate' && ($data['value'] > 80 || $data['value'] < 70)) {
+                            $abnormalCount++;
+                        }
+
+                        // Check movement rate
+                        if ($data['type'] == 'movement rate' && ($data['value'] > 25 || $data['value'] < 15)) {
+                            $abnormalCount++;
+                        }
+                    }
+
+                    /*(
+                      (($data['type'] == "heart rate" && $data['value'] > 80.9) ||($data['type'] == "heart rate" && $data['value'] < 70.9)) ||
+                      (($data['type'] == "movement rate" && $data['value'] > 25.9 )||($data['type'] == "movement rate" && $data['value'] < 15.7))
+                    )*/
+                    //dd($abnormalCount);
+                    if($abnormalCount >= 2){
+                        $cow->cow_status = 0; // Assuming status 0 means abnormal
+                    }else {
+                        $cow->cow_status = 1; // Assuming status 1 means normal
+                    }
+                    //dd($cow->cow_status);
+
+                    $cow->save(); // Save the updated cow status
+
+                    // Check if the cow's status has changed
+                    if ($cow->cow_status != $previousStatus  && !in_array($cow, $changedCows, true)) {
+                        $changedCows[] = $cow;
+
+                        CowSensor::create([
+                            'cow_id' => $cow->id,
+                            'sensor_id' => $data['sensor_id'],
+                            'values' => $data['value']
+                        ]);
+                    }
+                }
+            //}
+        }
+
+        //dd($changedCows);
+        ///Send notifications to currently authenticated doctor for each changed cow
+        if (!empty($changedCows)) {
+            Auth::user()->notify(new CowStatusChangedNotification($changedCows));
+        }
+
+        // Return the list of cows whose status has changed
+        return response()->json(['changed_cows' => $changedCows]);
+    }
+
+    private function isReadingOutOfRange($data)
+    {
+        // Check if the s ensor reading is outside the specified range
+        return ($data['type'] == 'temperature' && ($data['value'] < 35 || $data['value'] > 40)) ||
+            ($data['type'] == 'heart rate' && ($data['value'] < 60 || $data['value'] > 100)) ||
+            ($data['type'] == 'movement rate' && ($data['value'] < 10 || $data['value'] > 30));
+    }
+
+}

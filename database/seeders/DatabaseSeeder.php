@@ -7,6 +7,7 @@ use App\Models\ActivityPlace;
 use App\Models\ActivitySystem;
 use App\Models\Cow;
 use App\Models\Purpose;
+use App\Models\Sensor;
 use App\Models\Treatment;
 use App\Models\TreatmentDoseTimes;
 use App\Models\TreatmentStock;
@@ -31,5 +32,6 @@ class DatabaseSeeder extends Seeder
         TreatmentStock::factory(10)->create();
         Treatment::factory(5)->create();
         TreatmentDoseTimes::factory(10)->create();
+        Sensor::factory(30)->create();
     }
 }

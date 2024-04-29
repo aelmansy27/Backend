@@ -19,6 +19,7 @@ class Cow extends Model
         });
     }
 
+
     public function activityPlace()
     {
         return $this->belongsTo(ActivityPlace::class);

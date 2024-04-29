@@ -5,13 +5,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-
 use App\Http\Controllers\Auth\ResetPasswordWithPhoneController;
-
 use App\Http\Controllers\DoctorView\ActivityPlaceController;
 use App\Http\Controllers\DoctorView\CowController;
 use App\Http\Controllers\DoctorView\EditUserDataController;
-
+use App\Http\Controllers\DoctorView\SensorReadingController;
 use App\Http\Controllers\DoctorView\TreatmentController;
 use App\Http\Controllers\DoctorView\TreatmentDoseTimesController;
 use Illuminate\Http\Request;
@@ -66,6 +64,9 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::post('treatments/{treatment}/create-dose-times',[TreatmentDoseTimesController::class,'createDoseTime']);
     Route::post('treatments/{treatment}/edit-dose-times',[TreatmentDoseTimesController::class,'editDoseTime']);
 
+    //sensor data
+    Route::get('sensor',[SensorReadingController::class,'index']);
+    Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });
 

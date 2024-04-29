@@ -51,12 +51,10 @@ class ActivityPlaceController extends Controller
 
         $place = ActivityPlace::where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
         ->first();
-
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
         //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
 
         if (!$place) {
-
             return response([
                 'status' => false,
                 'message' => 'Activity place not found'
