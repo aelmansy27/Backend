@@ -48,12 +48,8 @@ class ActivityPlaceController extends Controller
 
         $filter = $request->type; // Assuming $request is available in your controller method
 
-
         $place = ActivityPlace::where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
-        ->first();
-        // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
-        //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
-
+        ->get();
         if (!$place) {
             return response([
                 'status' => false,
@@ -98,7 +94,7 @@ class ActivityPlaceController extends Controller
 
     public function filterByType(Request $request){
         $validator=Validator::make($request->all(),[
-            'type'=>'required|string'
+            'type'=>'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -106,9 +102,30 @@ class ActivityPlaceController extends Controller
         }
 
         $type = $request->get('type');
+        $activityPlaces = ActivityPlace::where('type', $type)->get();
+
+
+        return response()->json($activityPlaces);
+    }
+    public function searchWithFilter(Request $request){
+        $validator=Validator::make($request->all(),[
+            'type'=>'required|string',
+            'cowId'=>'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $type = $request->get('type');
+        $cowId=$request->get('cowId');
 
         $activityPlaces = ActivityPlace::where('type', $type)->get();
 
+        if($cowId !== null){
+            $activityPlaces->load(['cows' => function ($query) use ($cowId) {
+                $query->where('cowId', 'LIKE', "%{$cowId}%");
+            }]);        }
         return response()->json($activityPlaces);
     }
 

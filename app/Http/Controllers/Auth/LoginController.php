@@ -16,7 +16,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!Auth::attempt($credentials)) {
-            return $this->error('', 'Credentials do not match', 401);
+            return $this->error('', 'email or password do not match', 401);
         }
 
         $user = Auth::user();

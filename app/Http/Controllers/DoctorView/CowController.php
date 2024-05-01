@@ -36,7 +36,7 @@ class CowController extends Controller
         $filter = $request->cowId;
 
         // Assuming there's a relationship between Cow and ActivityPlace
-        $cow = Cow::where('cowId', 'LIKE',"%{$filter}%")->first(); // Assuming cowId is unique
+        $cow = Cow::where('cowId', 'LIKE',"%{$filter}%")->get(); // Assuming cowId is unique
         if (!$cow) {
             return response([
                 'status' => false,

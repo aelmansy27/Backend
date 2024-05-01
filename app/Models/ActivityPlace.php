@@ -14,7 +14,7 @@ class ActivityPlace extends Model
 
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->hasMany(Cow::class,'activityplace_id');
     }
 
     public function activitySystem()
