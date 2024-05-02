@@ -141,4 +141,27 @@ class CowController extends Controller
         return response()->json($cows, 200);
     }
 
+    public function filterCowByStatusWithSearch(Request $request){
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|boolean',
+            'cowId'=>'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $status = $request->get('status');
+        $cowId =$request->get('cowId');
+
+        $cows = Cow::where('cow_status', $status);
+
+        if($cowId !== null){
+            $cows->where('cowId','LIKE',"%{$cowId}%");
+        }
+        $query=$cows->get();
+
+        return response()->json($query, 200);
+    }
+
 }

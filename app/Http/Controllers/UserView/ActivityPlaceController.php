@@ -45,7 +45,7 @@ class ActivityPlaceController extends Controller
         $query= ActivityPlace::with('cows');// Eager loading (optional)
 
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
-        $place = $query->where('type', 'LIKE','%'.$filter.'%')->get();
+        $place = $query->where('type', 'LIKE',"%{$filter}%")->get();
 
         if (!$place) {
 
