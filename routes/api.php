@@ -57,6 +57,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
     Route::get('activity_place/{activityPlace}/filter-by-cow-status',[ActivityPlaceController::class,'filterByCowStatus']);
     Route::get('activity_place/filter-by-type',[ActivityPlaceController::class,'filterByType']);
+    Route::get('activity_place/search-with-filter',[ActivityPlaceController::class,'searchWithFilter']);
+
 
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });

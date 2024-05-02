@@ -106,4 +106,25 @@ class ActivityPlaceController extends Controller
     }
 
 
+    public function searchWithFilter(Request $request){
+        $validator=Validator::make($request->all(),[
+            'type'=>'required|string',
+            'cowId'=>'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $type = $request->get('type');
+        $cowId=$request->get('cowId');
+
+        $activityPlaces = ActivityPlace::where('type', $type)->get();
+
+        if($cowId !== null){
+            $activityPlaces->load(['cows' => function ($query) use ($cowId) {
+                $query->where('cowId', 'LIKE', "%{$cowId}%");
+            }]);        }
+        return response()->json($activityPlaces);
+    }
 }

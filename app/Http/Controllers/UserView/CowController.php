@@ -85,12 +85,10 @@ class CowController extends Controller
             'min_range'=>'required|numeric',
             'max_range'=>'required|numeric'
         ]);
-        //dd($validator);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
 
         $minRange=$request->get('min_range');
         $maxRange=$request->get('max_range');
