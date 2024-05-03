@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        ActivityPlace::factory(5)->create();
-        Purpose::factory(5)->create();
-        Cow::factory(5)->create();
-        TreatmentStock::factory(10)->create();
-        Treatment::factory(5)->create();
-        TreatmentDoseTimes::factory(10)->create();
-        Sensor::factory(30)->create();
+        //ActivityPlace::factory(5)->create();
+        //Purpose::factory(5)->create();
+        Cow::factory(6)->create();
+        //TreatmentStock::factory(10)->create();
+        //Treatment::factory(5)->create();
+        //TreatmentDoseTimes::factory(10)->create();
+        //Sensor::factory(30)->create();
     }
 }

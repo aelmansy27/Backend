@@ -45,4 +45,8 @@ class Cow extends Model
     public function treatments(){
         return $this->hasMany(Treatment::class);
     }
+
+    public function pregnancies(){
+        return $this->hasMany(Pregnancy::class);
+    }
 }

@@ -100,20 +100,20 @@ class CowController extends Controller
         if(isset($minRange) && isset($maxRange)) {
             // Handle specific age ranges based on your requirements
             if ($minRange == 0 && $maxRange == 0.3) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) >= ?'), [0]) // 0 days
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) <= ?'), [3]); // Up to 3 days
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [0]) // 0 days
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [3]); // Up to 3 days
             }else if ($minRange == 0.3 && $maxRange == 3) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) >= ?'), [4]) // More than 3 days (1 month)
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) <= ?'), [90]); // Up to 3 months
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [4]) // More than 3 days (1 month)
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), ebirthday_date) <= ?'), [90]); // Up to 3 months
             } else if ($minRange == 3 && $maxRange == 12) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) >= ?'), [91]) // More than 3 months (4 months)
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) <= ?'), [365]); // Up to 1 year (12 months)
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), ebirthday_date) >= ?'), [91]) // More than 3 months (4 months)
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [365]); // Up to 1 year (12 months)
             } else if ($minRange == 1 && $maxRange == 3) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) >= ?'), [365]) // More than 1 year
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) <= ?'), [1095]); // Up to 3 years
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [365]) // More than 1 year
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [1095]); // Up to 3 years
             } else if ($minRange == 3 && $maxRange == 6) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) >= ?'), [1096]) // More than 3 years
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), entrance_date) <= ?'), [2190]); // Up to 6 years
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [1096]) // More than 3 years
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [2190]); // Up to 6 years
             } else {
                 return response()->json(['message' => 'Invalid age range'], 400);
             }

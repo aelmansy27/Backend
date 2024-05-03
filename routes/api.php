@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordWithPhoneController;
 use App\Http\Controllers\DoctorView\ActivityPlaceController;
 use App\Http\Controllers\DoctorView\CowController;
 use App\Http\Controllers\DoctorView\EditUserDataController;
+use App\Http\Controllers\DoctorView\PregnancyController;
 use App\Http\Controllers\DoctorView\SensorReadingController;
 use App\Http\Controllers\DoctorView\TreatmentController;
 use App\Http\Controllers\DoctorView\TreatmentDoseTimesController;
@@ -71,6 +72,12 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     //sensor data
     Route::get('sensor',[SensorReadingController::class,'index']);
     Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
+
+    //pregnancy
+    Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
+    Route::post('cow/{cow}/born',[PregnancyController::class,'notPregnant']);
+
+
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 });
 

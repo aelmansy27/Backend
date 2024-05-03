@@ -22,14 +22,14 @@ return new class extends Migration
             $table->string('appearance');
             $table->string('image');
             $table->enum('gender',['heifer','bull']);
-            $table->dateTimeTz('entrance_date')->nullable();
-            $table->integer('age')->nullable();
+            $table->dateTimeTz('birthday_date')->nullable();
             $table->decimal('weight');
             $table->decimal('milk_amount_morning')->nullable();
             $table->decimal('milk_amount_afternoon')->nullable();
             $table->decimal('latitude')->nullable();
             $table->decimal('longitude')->nullable();
             $table->boolean('cow_status')->default(true);
+            $table->boolean('is_pregnant')->default(false);
             $table->timestamps();
         });
     }
