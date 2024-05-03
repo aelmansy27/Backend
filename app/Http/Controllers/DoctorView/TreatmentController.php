@@ -153,7 +153,16 @@ class TreatmentController extends Controller
             'message' => 'Treatment updated successfully!',
             'treatment' => $treatmentData,
         ]);
+    }
 
+    public function delete(Treatment $treatment){
 
+        if(!$treatment){
+            return response()->json(['error' => 'Treatment not found'], 404);
+        }
+        $treatment->delete();
+        return response()->json([
+            'message'=>'Treatment deleted Successfully'
+        ],200);
     }
 }
