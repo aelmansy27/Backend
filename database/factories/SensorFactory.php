@@ -21,7 +21,7 @@ class SensorFactory extends Factory
     {
         return [
             'name'=>$this->faker->name(),
-            'type'=>$this->faker->randomElement(['temperature','heart rate','movement rate']),
+            'type'=>$this->faker->randomElement(['heart rate']),
             'code'=>$this->faker->text
         ];
     }

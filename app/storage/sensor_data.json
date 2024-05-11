@@ -3,19 +3,29 @@
         "cow_id": 1,
         "sensor_readings": [
             {
-                "type": "temperature",
+                "type": "body temperature",
                 "value": 39.5,
-                "sensor_id": 3
+                "sensor_id": 31
             },
             {
                 "type": "heart rate",
                 "value": 90,
-                "sensor_id": 3
+                "sensor_id": 36
             },
             {
-                "type": "movement rate",
+                "type": "sleeping duration",
                 "value": 10,
                 "sensor_id": 1
+            },
+            {
+                "type": "ruminating",
+                "value": 14,
+                "sensor_id": 6
+            },
+            {
+                "type": "respiratory rate",
+                "value": 14,
+                "sensor_id": 3
             }
         ]
     },
@@ -23,19 +33,29 @@
         "cow_id": 2,
         "sensor_readings": [
             {
-                "type": "temperature",
+                "type": "body temperature",
                 "value": 40.2,
-                "sensor_id": 5
+                "sensor_id": 32
             },
             {
                 "type": "heart rate",
                 "value": 84,
-                "sensor_id": 4
+                "sensor_id": 37
             },
             {
-                "type": "movement rate",
+                "type": "sleeping duration",
                 "value": 10,
+                "sensor_id": 2
+            },
+            {
+                "type": "ruminating",
+                "value": 14,
                 "sensor_id": 7
+            },
+            {
+                "type": "respiratory rate",
+                "value": 14,
+                "sensor_id": 10
             }
         ]
     },
@@ -43,19 +63,29 @@
         "cow_id": 3,
         "sensor_readings": [
             {
-                "type": "temperature",
+                "type": "body temperature",
                 "value": 40.2,
-                "sensor_id": 6
+                "sensor_id": 33
             },
             {
                 "type": "heart rate",
                 "value": 75,
-                "sensor_id": 7
+                "sensor_id": 43
             },
             {
-                "type": "movement rate",
+                "type": "sleeping duration",
                 "value": 20,
-                "sensor_id": 10
+                "sensor_id": 4
+            },
+            {
+                "type": "ruminating",
+                "value": 14,
+                "sensor_id": 8
+            },
+            {
+                "type": "respiratory rate",
+                "value": 14,
+                "sensor_id": 19
             }
         ]
     },
@@ -63,19 +93,29 @@
         "cow_id": 4,
         "sensor_readings": [
             {
-                "type": "temperature",
+                "type": "body temperature",
                 "value": 40.0,
-                "sensor_id": 9
+                "sensor_id": 34
             },
             {
                 "type": "heart rate",
                 "value": 75,
-                "sensor_id": 14
+                "sensor_id": 44
             },
             {
-                "type": "movement rate",
+                "type": "sleeping duration",
                 "value": 8,
-                "sensor_id": 11
+                "sensor_id": 5
+            },
+            {
+                "type": "ruminating",
+                "value": 14,
+                "sensor_id": 9
+            },
+            {
+                "type": "respiratory rate",
+                "value": 14,
+                "sensor_id": 20
             }
         ]
     },
@@ -83,19 +123,29 @@
         "cow_id": 5,
         "sensor_readings": [
             {
-                "type": "temperature",
+                "type": "body temperature",
                 "value": 39.8,
-                "sensor_id": 12
+                "sensor_id": 35
             },
             {
                 "type": "heart rate",
                 "value": 10,
-                "sensor_id": 19
+                "sensor_id": 45
             },
             {
-                "type": "movement rate",
+                "type": "sleeping duration",
                 "value": 18,
-                "sensor_id": 17
+                "sensor_id": 13
+            },
+            {
+                "type": "ruminating",
+                "value": 14,
+                "sensor_id": 11
+            },
+            {
+                "type": "respiratory rate",
+                "value": 14,
+                "sensor_id": 22
             }
         ]
     }
