@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DoctorView;
+namespace App\Http\Controllers\DoctorView1;
 
 use App\Http\Controllers\Controller;
 use Dotenv\Validator;
