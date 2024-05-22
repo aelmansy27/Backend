@@ -51,23 +51,23 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
 
-    Route::get('/activity-systems', [ActivitySystemController::class, 'index']);
-    Route::get('/activity-systems/{id}',[ActivitySystemController::class,'show'])->name('show-asystem');
-    Route::get('/activity_systems/search',[ActivitySystemController::class,'search'])->name('find-asystem');
+//    Route::get('/activity-systems', [ActivitySystemController::class, 'index']);
+//    Route::get('/activity-systems/{id}',[ActivitySystemController::class,'show'])->name('show-asystem');
+//    Route::get('/activity_systems/search',[ActivitySystemController::class,'search'])->name('find-asystem');
     //Route::get('/activity_systems/filter',[ActivitySystemController::class,'filter']);
-    Route::get('activity_System/{activitySystem}/filter-by-cow-status',[ActivitySystemController::class,'filterByCowStatus']);
+   // Route::get('activity_System/{activitySystem}/filter-by-cow-status',[ActivitySystemController::class,'filterByCowStatus']);
 
-    Route::get('/breeding-systems', [BreedingSystemController::class, 'index']);
-    Route::get('/breeding-systems/{id}',[BreedingSystemController::class,'show'])->name('show-bsystem');
-    Route::get('/breeding_systems/search', [BreedingSystemController::class, 'search'])->name('find-bsystem');
-    Route::get('breeding_System/{breadingSystem}/filter-by-cow-status',[BreedingSystemController::class,'filterByCowStatus']);
+//    Route::get('/breeding-systems', [BreedingSystemController::class, 'index']);
+//    Route::get('/breeding-systems/{id}',[BreedingSystemController::class,'show'])->name('show-bsystem');
+//    Route::get('/breeding_systems/search', [BreedingSystemController::class, 'search'])->name('find-bsystem');
+//    Route::get('breeding_System/{breadingSystem}/filter-by-cow-status',[BreedingSystemController::class,'filterByCowStatus']);
 
 
-    Route::get('/cow-feed', [CowFeedController::class, 'index'])->name('show-bsystem');
-   // Route::get('/cow-feed/{id}', [CowFeedController::class, 'show-cowfeed']);
-
-   Route::get('/feed-stock', [FeedStockController::class, 'index'])->name('show-feedstock');
-    //Route::get('/feed-stock/{id}', [FeedStockController::class, 'show-feedstock']);
+//    Route::get('/cow-feed', [CowFeedController::class, 'index'])->name('show-bsystem');
+//   // Route::get('/cow-feed/{id}', [CowFeedController::class, 'show-cowfeed']);
+//
+//   Route::get('/feed-stock', [FeedStockController::class, 'index'])->name('show-feedstock');
+//    //Route::get('/feed-stock/{id}', [FeedStockController::class, 'show-feedstock']);
 
     Route::middleware('auth:sanctum')->get('/doctor', function (Request $request) {
         return $request->doctor();
@@ -86,19 +86,21 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/doc-activity-systems', [ActivitySysController::class, 'index']);
     Route::get('/doc-activity-systems/{id}',[ActivitySysController::class,'show']);
     Route::get('/doc-activity-system/search',[ActivitySysController::class,'search']);
+    Route::get('/doc-activity-system/{activitySystem}/filter',[ActivitySysController::class,'filterByCowStatus']);
     Route::get('/doc-activity-system/filter-search',[ActivitySysController::class,'searchWithFilter']);
     Route::post('/activity-system/create',[ActivitySysController::class,'create']);
     Route::get('/activity-system/edit/{id}',[ActivitySysController::class,'edit']);
     Route::put('/activity-system/update/{id}',[ActivitySysController::class,'update']);
 
 
-    Route::get('/doc-activity-systems', [\App\Http\Controllers\DoctorView2\BreedingSysController::Controller::class, 'index']);
-    Route::get('/doc-activity-systems/{id}',[ActivitySysController::class,'show']);
-    Route::get('/doc-activity-system/search',[ActivitySysController::class,'search']);
-    Route::get('/doc-activity-system/filter-search',[ActivitySysController::class,'searchWithFilter']);
-    Route::post('/activity-system/create',[ActivitySysController::class,'create']);
-    Route::get('/activity-system/edit/{id}',[ActivitySysController::class,'edit']);
-    Route::put('/activity-system/update/{id}',[ActivitySysController::class,'update']);
+    Route::get('/doc-breeding-systems', [BreedingSysController::class, 'index']);
+    Route::get('/doc-breeding-systems/{id}',[BreedingSysController::class,'show']);
+    Route::get('/doc-breeding-system/search',[BreedingSysController::class,'search']);
+    Route::get('/doc-breeding-system/{breadingSystem}/filter',[BreedingSysController::class,'filterByCowStatus']);
+    Route::get('/doc-breeding-system/filter-search',[BreedingSysController::class,'searchWithFilter']);
+    Route::post('/breeding-system/create',[BreedingSysController::class,'create']);
+    Route::get('/breeding-system/edit/{id}',[BreedingSysController::class,'edit']);
+    Route::put('/breeding-system/update/{id}',[BreedingSysController::class,'update']);
 
 
 

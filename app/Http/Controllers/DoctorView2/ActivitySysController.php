@@ -15,14 +15,14 @@ class ActivitySysController extends Controller
      */
     public function index(Request $request)
     {
-        $activitySystems = ActivitySystem::with('breadingSystem')->get();
-        $numberOfCows = ActivitySystem::distinct('cow_id')->count('cow_id');
+        $activitySystems = ActivitySystem::with('cows')->withCount('cows')->get();
+
 
 
         return response()->json([
             'status' => true,
             'activitySystems' => $activitySystems,
-            'number_of_cows' => $numberOfCows,
+            //'number_of_cows' => $numberOfCows,
 
         ]);
     }
@@ -94,13 +94,13 @@ class ActivitySysController extends Controller
      */
     public function show($id)
     {
-        $activitySystems = ActivitySystem::with('breadingSystem')->findOrFail($id);
-        $numberOfCows = ActivitySystem::distinct('cow_id')->count('cow_id');
+        $activitySystems = ActivitySystem::with('cows')->withCount('cows')->findOrFail($id);
+
 
         return response()->json([
             'status' => true,
             $activitySystems,
-            'number_of_cows' => $numberOfCows,
+
 
         ]);
     }
@@ -178,7 +178,7 @@ class ActivitySysController extends Controller
         $filter = $request->name; // Assuming $request is available in your controller method
 
 
-        $system = ActivitySystem::where('name', 'LIKE', "%{$filter}%")// Eager loading (optional)
+        $system = ActivitySystem::with('cows')->where('name', 'LIKE', "%{$filter}%")// Eager loading (optional)
         ->get();
         // Assuming $request->type holds a valid enum value (e.g., 'warehouse1')
         //$place = ActivityPlace::with('cows')->where('type', $filter)->first();
@@ -190,18 +190,18 @@ class ActivitySysController extends Controller
             ], 404);
         }
 
-        $cow = $system->cows; // Assuming activitySystem is the relationship
+      //  $cow = $system->cows; // Assuming activitySystem is the relationship
 
-        if (!$cow) {
+        /*if (!$cow) {
             return response([
                 'status' => false,
                 'message' => 'cows not found for this activity system'
             ], 404);
-        }
+        }*/
         return response([
             'status' => true,
             'activitySystem' => $system,
-            'cows' => $cow->count()
+           // 'cows' => $cow->count()
         ]);
 
     }
@@ -228,7 +228,7 @@ class ActivitySysController extends Controller
 
     public function searchWithFilter(Request $request){
         $validator=Validator::make($request->all(),[
-            'type'=>'required|string',
+            'name'=>'required|string',
             'cowId'=>'nullable|string'
         ]);
 
@@ -236,10 +236,10 @@ class ActivitySysController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $type = $request->get('type');
+        $type = $request->get('name');
         $cowId=$request->get('cowId');
 
-        $activitySystem = ActivitySystem::where('type', $type)->get();
+        $activitySystem = ActivitySystem::where('name', $type)->get();
 
         if($cowId !== null){
             $activitySystem->load(['cows' => function ($query) use ($cowId) {

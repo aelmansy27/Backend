@@ -16,12 +16,12 @@ class BreedingSysController extends Controller
     public function index()
     {
 
-        $breadingSystems = BreadingSystem::all();
-
+        $breadingSystems = BreadingSystem::with('cows')->withCount('cows')->get();
 
         return response()->json([
             'status' => true,
             'breadingSystems' => $breadingSystems,
+
         ]);
     }
 
@@ -88,7 +88,10 @@ class BreedingSysController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $breedingSystems = BreadingSystem::findOrFail($id);
+        return response()->json([
+            'status' => true,
+            $breedingSystems,]);
     }
 
     /**
@@ -96,7 +99,43 @@ class BreedingSysController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'goal' => 'required',
+            'cause_of_creation' => 'required',
+            'description' => 'required',
+            'activities' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 400, 'errors' => $validator->messages()], 400);
+        }
+
+
+        $breedingSystem = BreadingSystem::find($id);
+
+        if (!$breedingSystem) {
+            return response()->json(['status' => 404, 'message' => 'Activity System not found'], 404);
+        }
+
+
+        $breedingSystem->name = $request->name;
+        $breedingSystem->goal = $request->goal;
+        $breedingSystem->cause_of_creation = $request->cause_of_creation;
+        $breedingSystem->description = $request->description;
+        $breedingSystem->activities = $request->activities;
+
+        // Calculate apply duration
+//        $sleepTime = Carbon::parse($request->sleep_time);
+//        $wakeUpTime = Carbon::parse($request->wake_up_time);
+//        $applyDurationMinutes = $wakeUpTime->diffInMinutes($sleepTime);
+//        $activitySystem->apply_duration = $applyDurationMinutes;
+
+        // Save the updated activity system
+        $breedingSystem->save();
+
+        return response()->json(['status' => 200, 'message' => 'Breeding System updated successfully'], 200);
     }
 
     /**
@@ -116,7 +155,7 @@ class BreedingSysController extends Controller
 
 
         $system = BreadingSystem::where('name', 'LIKE', "%{$filter}%")// Eager loading (optional)
-        ->first();
+        ->get();
 
 
         if (!$system) {
@@ -126,18 +165,18 @@ class BreedingSysController extends Controller
             ], 404);
         }
 
-        $cow = $system->cows; // Assuming activityPlace is the relationship
+      //  $cow = $system->cows; // Assuming activityPlace is the relationship
 
-        if (!$cow) {
-            return response([
-                'status' => false,
-                'message' => 'cows not found for this breeding system'
-            ], 404);
-        }
+//        if (!$cow) {
+//            return response([
+//                'status' => false,
+//                'message' => 'cows not found for this breeding system'
+//            ], 404);
+       // }
         return response([
             'status' => true,
             'breadingSystem' => $system,
-            'cows' => $cow->count()
+            //'cows' => $cow->count()
         ]);
 
     }
