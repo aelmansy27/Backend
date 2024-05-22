@@ -56,6 +56,7 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('cows/filter-by-age-with-search',[CowController::class,'filterCowByAgesWithSearch']);
 
 
+
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
     Route::get('/activity_places/{id}',[ActivityPlaceController::class,'show']);
     Route::get('/activity_place/search',[ActivityPlaceController::class,'searchPlace']);
@@ -79,6 +80,7 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     //pregnancy
     Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
     Route::post('cow/{cow}/born',[PregnancyController::class,'notPregnant']);
+
 
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 

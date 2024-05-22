@@ -44,9 +44,9 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail(object $notifiable)
     {
-        $otp=$this->otp->generate($notifiable->email,6,60);
+       $otp=$this->otp->generate($notifiable->email,6, 60);
         return (new MailMessage)
                     ->mailer('smtp')
                     ->subject($this->subject)
