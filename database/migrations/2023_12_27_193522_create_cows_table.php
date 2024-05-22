@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('cows', function (Blueprint $table) {
+            $table->id();
+            $table->string('cowId',6)->unique();
+            $table->foreignId('activity_place_id');
+            $table->foreignId('activity_system_id');
+            $table->foreignId('breading_system_id');
+            $table->foreignId('purpose_id');
+            $table->string('original_area');
+            $table->string('appearance');
+            $table->string('image');
+            $table->enum('gender',['heifer','bull']);
+            $table->dateTimeTz('entrance_date')->nullable();
+            $table->integer('age')->nullable();
+            $table->decimal('weight');
+            $table->decimal('milk_amount_morning')->nullable();
+            $table->decimal('milk_amount_afternoon')->nullable();
+            $table->decimal('latitude')->nullable();
+            $table->decimal('longitude')->nullable();
+            $table->boolean('cow_status')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('cows');
+    }
+};
