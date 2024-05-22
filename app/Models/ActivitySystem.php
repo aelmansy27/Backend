@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ActivitySystem extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->hasMany(Cow::class,'activitysystem_id');
     }
 
     public function breadingSystem()

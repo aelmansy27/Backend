@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purposes', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->enum('name',['milk production','fattening']);
+            $table->string('note_id',5)->unique();
+            $table->foreignId('cow_id');
+            $table->string('image')->nullable();
+            $table->string('title');
+            $table->text('body');
+            $table->boolean('is_starred')->default(false);
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purposes');
+        Schema::dropIfExists('notes');
     }
 };

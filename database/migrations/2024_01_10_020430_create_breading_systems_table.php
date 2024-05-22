@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('goal');
             $table->text('cause_of_creation');
+            $table->text('description');
             $table->timestamps();
         });
     }

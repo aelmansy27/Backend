@@ -18,6 +18,10 @@ class BreadingSystem extends Model
     {
         return $this->hasMany(CowFeed::class);
     }
+    public function cows()
+    {
+        return $this->hasMany(Cow::class,'breadingsystem_id');
+    }
 
 
 }
