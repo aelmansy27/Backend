@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DoctorView1;
+namespace App\Http\Controllers\DoctorView2;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cow;
