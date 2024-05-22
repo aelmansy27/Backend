@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class CowFeed extends Model
 {
     use HasFactory;
+    use  LogsActivity;
 
     public function cow()
     {
@@ -28,5 +32,11 @@ class CowFeed extends Model
     public function eatingDates()
     {
         return $this->hasMany(EatingDate::class);
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*']);
     }
 }

@@ -29,22 +29,22 @@ class CowFactory extends Factory
         $purposeId=Purpose::inRandomOrder()->first()->id;
         return [
             'cowId'=>sprintf("%06d",mt_rand(1,999999)),
-            'activity_place_id'=>$activityPlaceId,
-            'activity_system_id'=>$activitySystemId,
-            'breading_system_id'=>$breadingSystemId,
+            'activityplace_id'=>$activityPlaceId,
+            'activitysystem_id'=>$activitySystemId,
+            'breadingsystem_id'=>$breadingSystemId,
             'purpose_id'=>$purposeId,
             'original_area'=>$this->faker->word,
             'appearance'=>$this->faker->word,
             'gender'=>$this->faker->randomElement(['heifer','bull']),
-            'entrance_date'=>$this->faker->dateTime,
-            'age'=>$this->faker->randomNumber(2),
+            'birthday_date'=>$this->faker->dateTime,
             'image'=>$this->faker->imageUrl(),
             'weight'=>$this->faker->randomFloat(2,10,1000),
             'milk_amount_morning'=>$this->faker->randomFloat(2,1,10),
             'milk_amount_afternoon'=>$this->faker->randomFloat(2,1,10),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
-            'cow_status'=>$this->faker->boolean
+            'cow_status'=>$this->faker->boolean,
+            'is_pregnant'=>$this->faker->boolean(false)
         ];
     }
 }

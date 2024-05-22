@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('treatment_stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); //name + gm
+            $table->string('type');
             $table->dateTimeTz('manufacturing_date');
             $table->string('manufacturing_code');
             $table->dateTimeTz('validation_period');
             $table->dateTimeTz('entrance_date');
+            $table->decimal('efficiency');
             $table->string('producer');
             $table->string('amount');
             $table->timestamps();

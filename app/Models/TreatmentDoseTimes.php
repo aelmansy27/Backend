@@ -8,13 +8,14 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class DrinkingDate extends Model
+class TreatmentDoseTimes extends Model
 {
     use HasFactory;
-    use  LogsActivity;
-    public function activitySystem()
-    {
-        return $this->belongsTo(ActivitySystem::class);
+    use LogsActivity;
+    protected $fillable=[];
+
+    public function treatment(){
+        return $this->belongsTo(Treatment::class);
     }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {

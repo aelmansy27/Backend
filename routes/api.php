@@ -5,13 +5,15 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-
 use App\Http\Controllers\Auth\ResetPasswordWithPhoneController;
-
-use App\Http\Controllers\UserView\ActivityPlaceController;
-use App\Http\Controllers\UserView\CowController;
-use App\Http\Controllers\UserView\EditUserDataController;
-
+use App\Http\Controllers\DoctorView2\ActivityPlaceController;
+use App\Http\Controllers\DoctorView2\CowController;
+use App\Http\Controllers\DoctorView2\EditUserDataController;
+use App\Http\Controllers\DoctorView2\LogController;
+use App\Http\Controllers\DoctorView2\PregnancyController;
+use App\Http\Controllers\DoctorView2\SensorReadingController;
+use App\Http\Controllers\DoctorView2\TreatmentController;
+use App\Http\Controllers\DoctorView2\TreatmentDoseTimesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Stevebauman\Location\Facades\Location;
@@ -41,16 +43,18 @@ Route::post('reset-with-phone',[ResetPasswordWithPhoneController::class,'resetPa
 
 
 //protected routes
-Route::group(['middleware'=>['auth:sanctum']],function (){
+Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::post('/logout',[LogoutController::class,'logout']);
     //cow routes
     Route::get('/cows',[CowController::class,'index']);
-    Route::get('/cows/show/{id}',[CowController::class,'show'])->name('show_cow');
-    Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
+    Route::get('/cows/show/{id}',[CowController::class,'show']);
+    Route::get('/cows/search',[CowController::class,'search']);
     Route::get('/cows/update/{id}',[CowController::class,'updateLocation']);
     Route::get('cows/filter-by-age',[CowController::class,'filterCowByAge']);
     Route::get('cows/filter-by-status',[CowController::class,'filterCowByStatus']);
     Route::get('cows/filter-by-status-with-search',[CowController::class,'filterCowByStatusWithSearch']);
+    Route::get('cows/filter-by-age-with-search',[CowController::class,'filterCowByAgesWithSearch']);
+
 
 
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);
@@ -61,7 +65,26 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('activity_place/search-with-filter',[ActivityPlaceController::class,'searchWithFilter']);
 
 
+    Route::get('cow/{cow}/treatments/all',[TreatmentController::class,'index']);
+    Route::get('cow/{cow}/treatments/show/{id}',[TreatmentController::class,'show']);
+    Route::post('cow/{cow}/treatment/create',[TreatmentController::class,'create']);
+    Route::post('treatment/{id}/edit',[TreatmentController::class,'edit']);
+    Route::delete('treatment/delete/{treatment}',[TreatmentController::class,'delete']);
+    Route::post('treatments/{treatment}/create-dose-times',[TreatmentDoseTimesController::class,'createDoseTime']);
+    Route::post('treatments/{treatment}/edit-dose-times',[TreatmentDoseTimesController::class,'editDoseTime']);
+
+    //sensor data
+    Route::get('sensor',[SensorReadingController::class,'index']);
+    Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
+
+    //pregnancy
+    Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
+    Route::post('cow/{cow}/born',[PregnancyController::class,'notPregnant']);
+
+
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
+
+    Route::get('log',[LogController::class,'index']);
 });
 
 

@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -50,5 +54,10 @@ class User extends Authenticatable
     public function cowFeeds()
     {
         return $this->hasMany(CowFeed::class);
+    }
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*']);
     }
 }
