@@ -27,6 +27,7 @@ class CowFactory extends Factory
         $activitySystemId=1;
         $breadingSystemId=1;
         $purposeId=Purpose::inRandomOrder()->first()->id;
+
         return [
             'cowId'=>sprintf("%06d",mt_rand(1,999999)),
             'activityplace_id'=>$activityPlaceId,
@@ -37,6 +38,8 @@ class CowFactory extends Factory
             'appearance'=>$this->faker->word,
             'gender'=>$this->faker->randomElement(['heifer','bull']),
             'birthday_date'=>$this->faker->dateTime,
+            'entrance_date'=>$this->faker->dateTime,
+            'age'=>$this->faker->randomNumber(2),
             'image'=>$this->faker->imageUrl(),
             'weight'=>$this->faker->randomFloat(2,10,1000),
             'milk_amount_morning'=>$this->faker->randomFloat(2,1,10),
@@ -44,7 +47,8 @@ class CowFactory extends Factory
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
             'cow_status'=>$this->faker->boolean,
-            'is_pregnant'=>$this->faker->boolean(false)
+            'is_pregnant'=>$this->faker->boolean(false),
+            'cow_status'=>$this->faker->boolean
         ];
     }
 }

@@ -13,17 +13,23 @@ class CowController extends Controller
 {
     public function index(Request $request)
     {
-        $cows = Cow::with('activityPlace')->get();
+        $cows = Cow::with('activityPlace','activitySystem','breadingSystem')->get();
+
 
         return response([
             'status' => true,
             'cows' => $cows,
         ]);
+
+
+
+
+
     }
 
     public function show($id)
     {
-        $cow=Cow::with('activityPlace')->findOrFail($id);
+        $cow=Cow::with('activityPlace','activitySystem','breadingSystem')->findOrFail($id);
         return response([
            'status'=>true,
            $cow

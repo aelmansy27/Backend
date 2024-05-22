@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('breading_systems', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('goal');
-            $table->text('cause_of_creation');
-            $table->text('description');
+            $table->string('note_id',5)->unique();
+            $table->foreignId('cow_id');
+            $table->string('image')->nullable();
+            $table->string('title');
+            $table->text('body');
+            $table->boolean('is_starred')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('breading_systems');
+        Schema::dropIfExists('notes');
     }
 };

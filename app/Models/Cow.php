@@ -62,5 +62,8 @@ class Cow extends Model
         return LogOptions::defaults()
             ->logOnly(['*']);
     }
+    public function notes(){
+        return $this->hasMany(Note::class);
+    }
 
 }

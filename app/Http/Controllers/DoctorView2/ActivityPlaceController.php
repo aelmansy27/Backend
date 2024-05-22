@@ -19,10 +19,14 @@ class ActivityPlaceController extends Controller
 {
     public function index()
     {
+
         $activityPlaces = ActivityPlace
             ::with('cows')
             ->withCount('cows')
             ->get();
+
+        $activityPlaces = ActivityPlace::with('cows')->withCount('cows')->get();
+
 
         return response([
             'status' => true,
@@ -127,5 +131,6 @@ class ActivityPlaceController extends Controller
             }]);        }
         return response()->json($activityPlaces);
     }
+
 
 }

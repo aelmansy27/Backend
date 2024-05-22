@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('image');
             $table->enum('gender',['heifer','bull']);
             $table->dateTimeTz('birthday_date')->nullable();
+            $table->dateTimeTz('entrance_date')->nullable();
+            $table->integer('age')->nullable();
             $table->decimal('weight');
             $table->decimal('milk_amount_morning')->nullable();
             $table->decimal('milk_amount_afternoon')->nullable();

@@ -13,9 +13,11 @@ class ActivitySystem extends Model
     use HasFactory;
     use  LogsActivity;
 
+    protected $guarded=[];
+
     public function cows()
     {
-        return $this->hasMany(Cow::class);
+        return $this->hasMany(Cow::class,'activitysystem_id');
     }
 
     public function breadingSystem()

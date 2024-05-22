@@ -25,7 +25,7 @@ class CowFeed extends Model
     {
         return $this->belongsTo(FeedStock::class);
     }
-    public function breadingSystem()
+    public function breedingSystem()
     {
         return $this->belongsTo(BreadingSystem::class);
     }
