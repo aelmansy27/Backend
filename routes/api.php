@@ -47,12 +47,13 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::post('/logout',[LogoutController::class,'logout']);
     //cow routes
     Route::get('/cows',[CowController::class,'index']);
-    Route::get('/cows/show/{id}',[CowController::class,'show'])->name('show_cow');
-    Route::get('/cows/search',[CowController::class,'search'])->name('find_cow');
+    Route::get('/cows/show/{id}',[CowController::class,'show']);
+    Route::get('/cows/search',[CowController::class,'search']);
     Route::get('/cows/update/{id}',[CowController::class,'updateLocation']);
     Route::get('cows/filter-by-age',[CowController::class,'filterCowByAge']);
     Route::get('cows/filter-by-status',[CowController::class,'filterCowByStatus']);
     Route::get('cows/filter-by-status-with-search',[CowController::class,'filterCowByStatusWithSearch']);
+    Route::get('cows/filter-by-age-with-search',[CowController::class,'filterCowByAgesWithSearch']);
 
 
     Route::get('/activity_places',[ActivityPlaceController::class,'index']);

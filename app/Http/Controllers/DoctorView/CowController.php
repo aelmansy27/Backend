@@ -36,7 +36,8 @@ class CowController extends Controller
         $filter = $request->cowId;
 
         // Assuming there's a relationship between Cow and ActivityPlace
-        $cow = Cow::where('cowId', 'LIKE',"%{$filter}%")->get(); // Assuming cowId is unique
+        $cow = Cow::where('cowId', 'LIKE',"%{$filter}%")
+            ->get(); // Assuming cowId is unique
         if (!$cow) {
             return response([
                 'status' => false,
@@ -44,19 +45,19 @@ class CowController extends Controller
             ], 404);
         }
 
-        $activityPlaces = $cow->activityPlace; // Assuming activityPlace is the relationship
+        //$activityPlaces = $cow->activityPlace; // Assuming activityPlace is the relationship
 
-        if (!$activityPlaces) {
+        /*if (!$activityPlaces) {
             return response([
                 'status' => false,
                 'message' => 'Activity place not found for this cow'
             ], 404);
-        }
+        }*/
 
         return response([
             'status' => true,
             'cow'=>$cow,
-        ]);
+        ],200);
     }
 
     public function updateLocation(Request $request,$id)
@@ -96,7 +97,7 @@ class CowController extends Controller
         $minRange=$request->get('min_range');
         $maxRange=$request->get('max_range');
 
-        $query=Cow::whereNotNull('entrance_date');
+        $query=Cow::whereNotNull('birthday_date');
         if(isset($minRange) && isset($maxRange)) {
             // Handle specific age ranges based on your requirements
             if ($minRange == 0 && $maxRange == 0.3) {
@@ -104,9 +105,9 @@ class CowController extends Controller
                 ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [3]); // Up to 3 days
             }else if ($minRange == 0.3 && $maxRange == 3) {
                 $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [4]) // More than 3 days (1 month)
-                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), ebirthday_date) <= ?'), [90]); // Up to 3 months
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [90]); // Up to 3 months
             } else if ($minRange == 3 && $maxRange == 12) {
-                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), ebirthday_date) >= ?'), [91]) // More than 3 months (4 months)
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [91]) // More than 3 months (4 months)
                 ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [365]); // Up to 1 year (12 months)
             } else if ($minRange == 1 && $maxRange == 3) {
                 $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [365]) // More than 1 year
@@ -167,4 +168,56 @@ class CowController extends Controller
         return response()->json($query, 200);
     }
 
+    public function filterCowByAgeWithSearch(Request $request){
+        $validator = Validator::make($request->all(), [
+            'min_range'=>'required|numeric',
+            'max_range'=>'required|numeric',
+            'cowId'=>'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $minRange=$request->get('min_range');
+        $maxRange=$request->get('max_range');
+
+        $query=Cow::whereNotNull('birthday_date');
+        if(isset($minRange) && isset($maxRange)) {
+            // Handle specific age ranges based on your requirements
+            if ($minRange == 0 && $maxRange == 0.3) {
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [0]) // 0 days
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [3]); // Up to 3 days
+            }else if ($minRange == 0.3 && $maxRange == 3) {
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [4]) // More than 3 days (1 month)
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [90]); // Up to 3 months
+            } else if ($minRange == 3 && $maxRange == 12) {
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [91]) // More than 3 months (4 months)
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [365]); // Up to 1 year (12 months)
+            } else if ($minRange == 1 && $maxRange == 3) {
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [365]) // More than 1 year
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [1095]); // Up to 3 years
+            } else if ($minRange == 3 && $maxRange == 6) {
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'), [1095]) // More than 3 years
+                ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [2190]); // Up to 6 years
+            } else if($minRange > 6 && $maxRange > $minRange){
+                $query->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) >= ?'),[2190])
+                    ->whereRaw(DB::raw('DATEDIFF(CURDATE(), birthday_date) <= ?'), [4380]);
+            } else {
+                return response()->json(['message' => 'Invalid age range'], 400);
+            }
+        } else {
+            return response()->json(['message' => 'Please provide both min_range and max_range parameters'], 400);
+        }
+        $cowId =$request->get('cowId');
+        $calves = $query->get();
+
+
+        if($cowId !== null){
+            $calves->where('cowId','LIKE',"%{$cowId}%");
+        }
+        //$query=$calves->get();
+
+        return response()->json($calves, 200);
+    }
 }

@@ -48,7 +48,8 @@ class ActivityPlaceController extends Controller
 
         $filter = $request->type; // Assuming $request is available in your controller method
 
-        $place = ActivityPlace::where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
+        $place = ActivityPlace::with('cows')
+        ->where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
         ->get();
         if (!$place) {
             return response([
@@ -57,18 +58,16 @@ class ActivityPlaceController extends Controller
             ], 404);
         }
 
-        $cow = $place->cows; // Assuming activityPlace is the relationship
-
-        if (!$cow) {
+        //$cow = $place->cows; // Assuming activityPlace is the relationship
+        /*if (!$cow) {
             return response([
                 'status' => false,
                 'message' => 'cows not found for this activity place'
             ], 404);
-        }
+        }*/
         return response([
             'status' => true,
             'activityPlace' => $place,
-            'cows' => $cow->count()
         ]);
 
     }
