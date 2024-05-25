@@ -94,40 +94,6 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 
     Route::get('log',[LogController::class,'index']);
-});
-
-
-Route::get('/location',function (Request $request){
-        $ip = '156.197.167.0';; //Dynamic IP address
-        $cowLocation = Location::get($ip);
-        return response([
-            'status'=>true,
-            'lan'=>$cowLocation->latitude,
-            'lag'=>$cowLocation->longitude,
-            'country'=>$cowLocation->countryName,
-            'city'=>$cowLocation->cityName
-
-    ]);
-
-//    Route::get('/activity-systems', [ActivitySystemController::class, 'index']);
-//    Route::get('/activity-systems/{id}',[ActivitySystemController::class,'show'])->name('show-asystem');
-//    Route::get('/activity_systems/search',[ActivitySystemController::class,'search'])->name('find-asystem');
-    //Route::get('/activity_systems/filter',[ActivitySystemController::class,'filter']);
-   // Route::get('activity_System/{activitySystem}/filter-by-cow-status',[ActivitySystemController::class,'filterByCowStatus']);
-
-//    Route::get('/breeding-systems', [BreedingSystemController::class, 'index']);
-//    Route::get('/breeding-systems/{id}',[BreedingSystemController::class,'show'])->name('show-bsystem');
-//    Route::get('/breeding_systems/search', [BreedingSystemController::class, 'search'])->name('find-bsystem');
-//    Route::get('breeding_System/{breadingSystem}/filter-by-cow-status',[BreedingSystemController::class,'filterByCowStatus']);
-
-
-//    Route::get('/cow-feed', [CowFeedController::class, 'index'])->name('show-bsystem');
-//   // Route::get('/cow-feed/{id}', [CowFeedController::class, 'show-cowfeed']);
-//
-//   Route::get('/feed-stock', [FeedStockController::class, 'index'])->name('show-feedstock');
-//    //Route::get('/feed-stock/{id}', [FeedStockController::class, 'show-feedstock']);
-
-
 
 
     Route::get('/notes',[NoteController::class,'index']);
@@ -160,3 +126,40 @@ Route::get('/location',function (Request $request){
 
 
 });
+
+
+Route::get('/location',function (Request $request) {
+    $ip = '156.197.167.0';; //Dynamic IP address
+    $cowLocation = Location::get($ip);
+    return response([
+        'status' => true,
+        'lan' => $cowLocation->latitude,
+        'lag' => $cowLocation->longitude,
+        'country' => $cowLocation->countryName,
+        'city' => $cowLocation->cityName
+
+    ]);
+});
+
+//    Route::get('/activity-systems', [ActivitySystemController::class, 'index']);
+//    Route::get('/activity-systems/{id}',[ActivitySystemController::class,'show'])->name('show-asystem');
+//    Route::get('/activity_systems/search',[ActivitySystemController::class,'search'])->name('find-asystem');
+    //Route::get('/activity_systems/filter',[ActivitySystemController::class,'filter']);
+   // Route::get('activity_System/{activitySystem}/filter-by-cow-status',[ActivitySystemController::class,'filterByCowStatus']);
+
+//    Route::get('/breeding-systems', [BreedingSystemController::class, 'index']);
+//    Route::get('/breeding-systems/{id}',[BreedingSystemController::class,'show'])->name('show-bsystem');
+//    Route::get('/breeding_systems/search', [BreedingSystemController::class, 'search'])->name('find-bsystem');
+//    Route::get('breeding_System/{breadingSystem}/filter-by-cow-status',[BreedingSystemController::class,'filterByCowStatus']);
+
+
+//    Route::get('/cow-feed', [CowFeedController::class, 'index'])->name('show-bsystem');
+//   // Route::get('/cow-feed/{id}', [CowFeedController::class, 'show-cowfeed']);
+//
+//   Route::get('/feed-stock', [FeedStockController::class, 'index'])->name('show-feedstock');
+//    //Route::get('/feed-stock/{id}', [FeedStockController::class, 'show-feedstock']);
+
+
+
+
+

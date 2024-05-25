@@ -36,12 +36,12 @@ class DatabaseSeeder extends Seeder
 //         ]);
 
       // Purpose::factory(5)->create();
-        // BreadingSystem::factory(5)->create();
-        //ActivitySystem::factory(5)->create();
+         BreadingSystem::factory(5)->create();
+        ActivitySystem::factory(5)->create();
          //ActivityPlace::factory(5)->create();
-        //FeedStock::factory()->count(5)->create();
+        FeedStock::factory()->count(5)->create();
      //  Cow::factory(5)->create();
-       // Note::factory()->count(5)->create();
+        Note::factory()->count(5)->create();
         CowFeed::factory()->count(5)->create();
 
         // \App\Models\User::factory()->create([
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
         //TreatmentStock::factory(10)->create();
         //Treatment::factory(5)->create();
         //TreatmentDoseTimes::factory(10)->create();
-        Sensor::factory(5)->create();
+        //Sensor::factory(5)->create();
 
     }
 }
