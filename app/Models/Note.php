@@ -19,9 +19,6 @@ class Note extends Model
         'title',
         'body'
     ];
-
-
-
     public function cow()
     {
         return $this->belongsTo(Cow::class, 'note_id');

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ActivityPlace;
 use App\Models\ActivitySystem;
+use App\Models\BreadingSystem;
 use App\Models\Cow;
 use App\Models\Purpose;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,10 +24,10 @@ class CowFactory extends Factory
 
     public function definition(): array
     {
-        $activityPlaceId=ActivityPlace::inRandomOrder()->first()->id;
-        $activitySystemId=1;
-        $breadingSystemId=1;
-        $purposeId=Purpose::inRandomOrder()->first()->id;
+        $activityPlaceId=ActivityPlace::factory();
+        $activitySystemId=ActivitySystem::factory();
+        $breadingSystemId=BreadingSystem::factory();
+        $purposeId=Purpose::factory();
 
         return [
             'cowId'=>sprintf("%06d",mt_rand(1,999999)),

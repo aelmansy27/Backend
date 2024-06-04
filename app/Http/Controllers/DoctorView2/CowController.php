@@ -5,7 +5,7 @@ namespace App\Http\Controllers\DoctorView2;
 use App\Http\Controllers\Controller;
 use App\Models\Cow;
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -26,9 +26,6 @@ class CowController extends Controller
 
     public function show($id)
     {
-
-        $cow = Cow::with('activityPlace')->findOrFail($id);
-
         $cow = Cow::with('activityPlace', 'activitySystem', 'breadingSystem')->findOrFail($id);
 
         return response([
@@ -44,7 +41,7 @@ class CowController extends Controller
 
         // Assuming there's a relationship between Cow and ActivityPlace
         $cow = Cow::where('cowId', 'LIKE', "%{$filter}%")
-            ->get(); // Assuming cowId is unique
+                ->get(); // Assuming cowId is unique
         if (!$cow) {
             return response([
                 'status' => false,

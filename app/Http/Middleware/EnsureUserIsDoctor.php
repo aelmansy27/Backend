@@ -17,13 +17,14 @@ class EnsureUserIsDoctor
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(Auth::user()->is_doctor){
+        if(!Auth::check() || !Auth::user()->is_doctor){
 
-           return $next($request);
-        }else{
             return \response([
                 'message'=>'you are not doctor to access this page'
-            ]);
+            ],403);
+
+        }else{
+            return $next($request);
         }
     }
 

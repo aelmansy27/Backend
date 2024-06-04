@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('purpose_id');
             $table->string('original_area');
             $table->string('appearance');
-            $table->string('image');
+            $table->text('image');
             $table->enum('gender',['heifer','bull']);
             $table->dateTimeTz('birthday_date')->nullable();
             $table->dateTimeTz('entrance_date')->nullable();

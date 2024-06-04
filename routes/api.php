@@ -37,10 +37,6 @@ use Stevebauman\Location\Facades\Location;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 //public routes
 Route::post('/register',[RegisterController::class,'register']);
 Route::post('/login',[LoginController::class,'login']);
@@ -51,7 +47,7 @@ Route::post('reset-with-phone',[ResetPasswordWithPhoneController::class,'resetPa
 
 
 //protected routes
-Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
+Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/logout',[LogoutController::class,'logout']);
     //cow routes
     Route::get('/cows',[CowController::class,'index']);
@@ -73,46 +69,59 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('activity_place/search-with-filter',[ActivityPlaceController::class,'searchWithFilter']);
 
 
+    Route::group(['middleware'=>'isDoctor'],function (){
+        Route::get('cow/{cow}/treatments/all',[TreatmentController::class,'index']);
+        Route::get('cow/{cow}/treatments/show/{id}',[TreatmentController::class,'show']);
+        Route::post('cow/{cow}/treatment/create',[TreatmentController::class,'create']);
+        Route::post('treatment/{id}/edit',[TreatmentController::class,'edit']);
+        Route::delete('treatment/delete/{treatment}',[TreatmentController::class,'delete']);
+        Route::post('treatments/{treatment}/create-dose-times',[TreatmentDoseTimesController::class,'createDoseTime']);
+        Route::post('treatments/{treatment}/edit-dose-times',[TreatmentDoseTimesController::class,'editDoseTime']);
 
-    Route::get('cow/{cow}/treatments/all',[TreatmentController::class,'index']);
-    Route::get('cow/{cow}/treatments/show/{id}',[TreatmentController::class,'show']);
-    Route::post('cow/{cow}/treatment/create',[TreatmentController::class,'create']);
-    Route::post('treatment/{id}/edit',[TreatmentController::class,'edit']);
-    Route::delete('treatment/delete/{treatment}',[TreatmentController::class,'delete']);
-    Route::post('treatments/{treatment}/create-dose-times',[TreatmentDoseTimesController::class,'createDoseTime']);
-    Route::post('treatments/{treatment}/edit-dose-times',[TreatmentDoseTimesController::class,'editDoseTime']);
+        Route::get('log',[LogController::class,'index']);
 
-    //sensor data
-    Route::get('sensor',[SensorReadingController::class,'index']);
-    Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
+        Route::get('/notes',[NoteController::class,'index']);
+        Route::get('/notes/{id}',[NoteController::class,'show']);
+        Route::post('/store',[NoteController::class,'store']);
+        Route::get('/edit/{id}',[NoteController::class,'edit']);
+        Route::put('/edit/{id}',[NoteController::class,'update']);
+        Route::delete('/delete/{id}',[NoteController::class,'destroy']);
+        Route::post('/notes/{id}/star', [NoteController::class, 'star']);
+        Route::post('/notes/{id}/unstar', [NoteController::class, 'unstar']);
 
-    //pregnancy
-    Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
-    Route::post('cow/{cow}/born',[PregnancyController::class,'notPregnant']);
+        //pregnancy
+        Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
+        Route::post('cow/{cow}/born',[PregnancyController::class,'notPregnant']);
+
+        //sensor data
+        Route::get('sensor',[SensorReadingController::class,'index']);
+        Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
+
+
+        Route::post('/activity-system/create',[ActivitySysController::class,'create']);
+        Route::get('/activity-system/edit/{id}',[ActivitySysController::class,'edit']);
+        Route::put('/activity-system/update/{id}',[ActivitySysController::class,'update']);
+
+        Route::post('/breeding-system/create',[BreedingSysController::class,'create']);
+        Route::get('/breeding-system/edit/{id}',[BreedingSysController::class,'edit']);
+        Route::put('/breeding-system/update/{id}',[BreedingSysController::class,'update']);
+
+
+    });
+
+
+
 
 
     Route::post('/setting/user/{id}',[EditUserDataController::class,'edit']);
 
-    Route::get('log',[LogController::class,'index']);
 
-
-    Route::get('/notes',[NoteController::class,'index']);
-    Route::get('/notes/{id}',[NoteController::class,'show']);
-    Route::post('/store',[NoteController::class,'store']);
-    Route::get('/edit/{id}',[NoteController::class,'edit']);
-    Route::put('/edit/{id}',[NoteController::class,'update']);
-    Route::delete('/delete/{id}',[NoteController::class,'destroy']);
-    Route::post('/notes/{id}/star', [NoteController::class, 'star']);
-    Route::post('/notes/{id}/unstar', [NoteController::class, 'unstar']);
 
     Route::get('/doc-activity-systems', [ActivitySysController::class, 'index']);
     Route::get('/doc-activity-systems/{id}',[ActivitySysController::class,'show']);
     Route::get('/doc-activity-system/search',[ActivitySysController::class,'search']);
     Route::get('/doc-activity-system/{activitySystem}/filter',[ActivitySysController::class,'filterByCowStatus']);
     Route::get('/doc-activity-system/filter-search',[ActivitySysController::class,'searchWithFilter']);
-    Route::post('/activity-system/create',[ActivitySysController::class,'create']);
-    Route::get('/activity-system/edit/{id}',[ActivitySysController::class,'edit']);
-    Route::put('/activity-system/update/{id}',[ActivitySysController::class,'update']);
 
 
     Route::get('/doc-breeding-systems', [BreedingSysController::class, 'index']);
@@ -120,9 +129,7 @@ Route::group(['middleware'=>['auth:sanctum','isDoctor']],function (){
     Route::get('/doc-breeding-system/search',[BreedingSysController::class,'search']);
     Route::get('/doc-breeding-system/{breadingSystem}/filter',[BreedingSysController::class,'filterByCowStatus']);
     Route::get('/doc-breeding-system/filter-search',[BreedingSysController::class,'searchWithFilter']);
-    Route::post('/breeding-system/create',[BreedingSysController::class,'create']);
-    Route::get('/breeding-system/edit/{id}',[BreedingSysController::class,'edit']);
-    Route::put('/breeding-system/update/{id}',[BreedingSysController::class,'update']);
+
 
 
 });

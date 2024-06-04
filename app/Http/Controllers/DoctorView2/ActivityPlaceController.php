@@ -20,12 +20,16 @@ class ActivityPlaceController extends Controller
     public function index()
     {
 
-        $activityPlaces = ActivityPlace
-            ::with('cows')
-            ->withCount('cows')
-            ->get();
+        $activityPlaces = ActivityPlace::with([
+            'cows' => function ($query) {
+                $query->with('breadingSystem', 'activityPlace', 'activitySystem'); // Include related models
+            },
+            'cows.breadingSystem', // Include breedingSystem directly (optional)
+            'cows.activitySystem',
+            'cows.activityPlace'// Include readingSystem directly (optional)
+        ])->withCount('cows')->get();
 
-        $activityPlaces = ActivityPlace::with('cows')->withCount('cows')->get();
+
 
 
         return response([
@@ -36,10 +40,9 @@ class ActivityPlaceController extends Controller
 
     public function show($id)
     {
-        $activityplace = ActivityPlace
-            ::with('cows')
-            ->withCount('cows')
-            ->findOrFail($id);
+        $activityplace = ActivityPlace::with('cows')
+                ->withCount('cows')
+                ->findOrFail($id);
 
         return response([
             'status' => true,
@@ -50,11 +53,11 @@ class ActivityPlaceController extends Controller
     public function searchPlace(Request $request)
     {
 
-        $filter = $request->type; // Assuming $request is available in your controller method
+        $filter = $request->name;
 
         $place = ActivityPlace::with('cows')
-        ->where('type', 'LIKE', "%{$filter}%")// Eager loading (optional)
-        ->get();
+                ->where('name', 'LIKE', "%{$filter}%")// Eager loading (optional)
+                ->get();
         if (!$place) {
             return response([
                 'status' => false,
@@ -89,8 +92,8 @@ class ActivityPlaceController extends Controller
 
 
         $cows = Cow::where('activityplace_id',$activityPlace->id)
-            ->where('cow_status', $status)
-            ->get() ;
+                    ->where('cow_status', $status)
+                    ->get() ;
         return response()->json($cows, 200);
 
     }

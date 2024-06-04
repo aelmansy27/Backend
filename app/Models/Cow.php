@@ -29,17 +29,17 @@ class Cow extends Model
 
     public function activityPlace()
     {
-        return $this->belongsTo(ActivityPlace::class);
+        return $this->belongsTo(ActivityPlace::class,'activityplace_id','id');
     }
 
     public function activitySystem()
     {
-        return $this->belongsTo(ActivitySystem::class);
+        return $this->belongsTo(ActivitySystem::class,'activitysystem_id','id');
     }
 
     public function breadingSystem()
     {
-        return $this->belongsTo(BreadingSystem::class);
+        return $this->belongsTo(BreadingSystem::class,'breadingsystem_id','id');
     }
 
     public function cowSensors()

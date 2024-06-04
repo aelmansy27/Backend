@@ -22,7 +22,7 @@ class ActivitySystemFactory extends Factory
     protected $model =ActivitySystem::class;
     public function definition(): array
     {
-        $breadingSystemId=BreadingSystem::inRandomOrder()->first()->id;
+        $breadingSystemId=BreadingSystem::factory();
 
      return [
 

@@ -15,9 +15,15 @@ class ActivitySysController extends Controller
      */
     public function index(Request $request)
     {
-        $activitySystems = ActivitySystem::with('cows')->withCount('cows')->get();
 
-
+        $activitySystems = ActivitySystem::with([
+            'cows' => function ($query) {
+                $query->with('breadingSystem', 'activityPlace', 'activitySystem'); // Include related models
+            },
+            'cows.breadingSystem', // Include breedingSystem directly (optional)
+            'cows.activitySystem',
+            'cows.activityPlace'// Include readingSystem directly (optional)
+        ])->withCount('cows')->get();
 
         return response()->json([
             'status' => true,

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\ActivityType;
 use App\Models\ActivityPlace;
+use App\Models\ActivitySystem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +20,10 @@ class ActivityPlaceFactory extends Factory
     protected $model=ActivityPlace::class;
     public function definition(): array
     {
-        $activitySystemId=1;
+        $activitySystemId=ActivitySystem::factory();
         return [
             'activitysystem_id'=>$activitySystemId,
+            'name'=>$this->faker->name,
             'image'=>$this->faker->imageUrl(),
             'goal'=>$this->faker->text,
             'description'=>$this->faker->text,

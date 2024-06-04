@@ -135,12 +135,4 @@ class SensorReadingController extends Controller
             return response()->json(['changed_cows' => $changedCows]);
     }
 
-    private function isReadingOutOfRange($data)
-    {
-        // Check if the s ensor reading is outside the specified range
-        return ($data['type'] == 'temperature' && ($data['value'] < 35 || $data['value'] > 40)) ||
-            ($data['type'] == 'heart rate' && ($data['value'] < 60 || $data['value'] > 100)) ||
-            ($data['type'] == 'movement rate' && ($data['value'] < 10 || $data['value'] > 30));
-    }
-
 }
