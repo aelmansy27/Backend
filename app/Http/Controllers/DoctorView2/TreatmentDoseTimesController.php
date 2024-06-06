@@ -16,7 +16,7 @@ class TreatmentDoseTimesController extends Controller
                 'dose_times'=>'required|array',
                 'dose_times.*.date'=>'required|date',
                 'dose_times.*.time'=>'required|date_format:H:i:s',
-                'dose_times.*.is_Taken'=>'nullable|boolean'
+                'dose_times.*.is_taken'=>'nullable|boolean'
             ]);
 
             TreatmentDoseTimes::unguard();
@@ -36,7 +36,7 @@ class TreatmentDoseTimesController extends Controller
             'dose_times'=>'required|array',
             'dose_times.*.date'=>'required|date',
             'dose_times.*.time'=>'required|date_format:H:i:s',
-            'dose_times.*.is_Taken'=>'nullable|boolean'
+            'dose_times.*.is_taken'=>'nullable|boolean'
         ]);
 
         $existingDoseTimes=$treatment->treatmentDoseTimes;

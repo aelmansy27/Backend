@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('treatment_dose_times', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('treatment_id');
+            $table->foreignId('treatment_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->time('time');
             $table->boolean('is_taken');

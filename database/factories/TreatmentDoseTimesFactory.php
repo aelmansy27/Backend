@@ -20,7 +20,7 @@ class TreatmentDoseTimesFactory extends Factory
     public function definition(): array
     {
         return [
-            'treatment_id'=>Treatment::inRandomOrder()->first()->id,
+            'treatment_id'=>Treatment::factory(),
             'date'=>$this->faker->date(),
             'time'=>$this->faker->time(),
             'is_taken'=>$this->faker->boolean

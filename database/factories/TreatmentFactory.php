@@ -22,7 +22,7 @@ class TreatmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'cow_id' => Cow::inRandomOrder()->first()->id,
+            'cow_id' => Cow::factory(),
             'name'=>$this->faker->sentence(),
             'treatmentstock_id' => TreatmentStock::factory(),
             'disease' => $this->faker->sentence(),

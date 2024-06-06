@@ -62,7 +62,7 @@ class TreatmentController extends Controller
             ->first();
 
         if(!$treatmentStock){
-            return response()->json(['message'=>'Treatment not found']);
+            return response()->json(['message'=>'Treatment not found'],404);
         }
 
         $treatment=new Treatment;
