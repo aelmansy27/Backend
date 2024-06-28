@@ -18,8 +18,8 @@ return new class extends Migration
             $table->dateTimeTz('manufacturing_date');
             $table->string('manufacturing_code');
             $table->dateTimeTz('validation_period');
-            $table->dateTimeTz('entrance_date');
             $table->decimal('efficiency');
+            $table->decimal('concentration');
             $table->string('producer');
             $table->string('amount');
             $table->timestamps();

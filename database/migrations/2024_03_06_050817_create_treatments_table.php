@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cow_id');
             $table->string('name');
-            $table->foreignId('treatmentstock_id'); //name of treatment stock that contain name + dose as gm + type as method
+            $table->foreignId('treatment_stock_id'); //name of treatment stock that contain name + dose as gm + type as method
             $table->text('disease');
             $table->integer('doses'); //counter
             $table->longText('diagnose');  // maybe in additional info

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -16,6 +15,7 @@ class Cow extends Model
 
     // use  \OwenIt\Auditing\Auditable;
     protected $guarded = [];
+    public $timestamps=true;
 
     protected static function boot()
     {
@@ -29,17 +29,17 @@ class Cow extends Model
 
     public function activityPlace()
     {
-        return $this->belongsTo(ActivityPlace::class,'activityplace_id','id');
+        return $this->belongsTo(ActivityPlace::class,'activity_place_id');
     }
 
     public function activitySystem()
     {
-        return $this->belongsTo(ActivitySystem::class,'activitysystem_id','id');
+        return $this->belongsTo(ActivitySystem::class,'activity_system_id');
     }
 
     public function breadingSystem()
     {
-        return $this->belongsTo(BreadingSystem::class,'breadingsystem_id','id');
+        return $this->belongsTo(BreadingSystem::class,'breading_system_id');
     }
 
     public function cowSensors()
@@ -57,13 +57,19 @@ class Cow extends Model
         return $this->hasMany(Treatment::class);
     }
 
+    public function notes(){
+        return $this->hasMany(Note::class);
+    }
+    public function milkAmounts(){
+        return $this->hasMany(MilkAmount::class);
+    }
+
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
-    }
-    public function notes(){
-        return $this->hasMany(Note::class);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 
 }

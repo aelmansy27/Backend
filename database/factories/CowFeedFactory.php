@@ -31,8 +31,8 @@ class CowFeedFactory extends Factory
         return [
             'user_id' => $userId,
             'cow_id' => $cowId,
-            'breadindsystem_id'=>$breadingSystemId,
-            'feedstock_id' => $feedStockId,
+            'breading_system_id'=>$breadingSystemId,
+            'feed_stock_id' => $feedStockId,
             'amount' => $this->faker->randomFloat(2, 0, 1000),
             'actual_amount' => $this->faker->randomFloat(2, 0, 1000),
         ];

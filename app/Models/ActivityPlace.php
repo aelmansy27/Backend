@@ -14,16 +14,16 @@ class ActivityPlace extends Model
     use HasFactory;
     use  LogsActivity;
     protected $guarded=[];
-
+    public $timestamps=true;
 
     public function cows()
     {
-        return $this->hasMany(Cow::class,'activityplace_id');
+        return $this->hasMany(Cow::class);
     }
 
     public function activitySystem()
     {
-        return $this->belongsTo(ActivitySystem::class);
+        return $this->belongsTo(ActivitySystem::class,'activity_system_id');
     }
     protected  $casts=[
         'type'=>ActivityType::class
@@ -32,6 +32,8 @@ class ActivityPlace extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

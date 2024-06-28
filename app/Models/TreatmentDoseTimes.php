@@ -12,14 +12,18 @@ class TreatmentDoseTimes extends Model
 {
     use HasFactory;
     use LogsActivity;
-    protected $fillable=[];
+    protected $guarded=[];
+
+    public $timestamps=true;
 
     public function treatment(){
-        return $this->belongsTo(Treatment::class);
+        return $this->belongsTo(Treatment::class,'treatment_id');
     }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

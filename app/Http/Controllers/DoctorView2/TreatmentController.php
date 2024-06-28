@@ -59,6 +59,7 @@ class TreatmentController extends Controller
 
         $treatmentStock=TreatmentStock::where('name', $name)
             ->where('type',$type)
+            ->where('concentration',$request->concentration)
             ->first();
 
         if(!$treatmentStock){

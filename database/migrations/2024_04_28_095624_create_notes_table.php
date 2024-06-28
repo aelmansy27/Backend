@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('note_id',5)->unique();
+            $table->string('noteId',5)->unique();
             $table->foreignId('cow_id');
             $table->string('image')->nullable();
             $table->string('title');

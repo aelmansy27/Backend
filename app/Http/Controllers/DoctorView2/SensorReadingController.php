@@ -135,4 +135,13 @@ class SensorReadingController extends Controller
             return response()->json(['changed_cows' => $changedCows]);
     }
 
+    public function readingCowSensor(){
+
+        $fakeData = File::get(base_path('app/storage/sensor_data.json'));
+        $sensorData = json_decode($fakeData, true);
+        return response()->json(['Reading Sensor'=> $sensorData],200);
+
+    }
+
+
 }

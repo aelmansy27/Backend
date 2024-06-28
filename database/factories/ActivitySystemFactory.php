@@ -22,7 +22,7 @@ class ActivitySystemFactory extends Factory
     protected $model =ActivitySystem::class;
     public function definition(): array
     {
-        $breadingSystemId=BreadingSystem::factory();
+        $breadingSystemId=BreadingSystem::inRandomOrder()->first()->id;
 
      return [
 
@@ -31,7 +31,7 @@ class ActivitySystemFactory extends Factory
                  'cause_of_creation' =>fake()-> paragraph(),
                  'description' =>fake()-> paragraph(),
                  'activities' =>fake()-> paragraph(),
-                 'breadingsystem_id'=>$breadingSystemId,
+                 'breading_system_id'=>$breadingSystemId,
                  'sleep_time' => fake()->dateTimeThisMonth(),
                  'wakeup_time' => fake()->dateTimeThisMonth(),
                  'created_at' => now(),

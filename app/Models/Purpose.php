@@ -13,12 +13,17 @@ class Purpose extends Model
     use HasFactory;
     use  LogsActivity;
     protected $guarded=[];
+
+    public $timestamps=true;
+
     public function cows(){
         return $this->hasMany(Cow::class);
     }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

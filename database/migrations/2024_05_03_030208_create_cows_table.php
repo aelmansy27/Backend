@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('cows', function (Blueprint $table) {
             $table->id();
             $table->string('cowId',6)->unique();
-            $table->foreignId('activityplace_id');
-            $table->foreignId('activitysystem_id');
-            $table->foreignId('breadingsystem_id');
+            $table->foreignId('activity_place_id');
+            $table->foreignId('activity_system_id');
+            $table->foreignId('breading_system_id');
             $table->foreignId('purpose_id');
             $table->string('original_area');
             $table->string('appearance');

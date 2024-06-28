@@ -12,6 +12,10 @@ class FeedStock extends Model
 {
     use HasFactory;
     use  LogsActivity;
+
+    public $timestamps=true;
+
+    protected $guarded=[];
     public function cowFeeds()
     {
         return $this->hasMany(CowFeed::class);
@@ -19,6 +23,8 @@ class FeedStock extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

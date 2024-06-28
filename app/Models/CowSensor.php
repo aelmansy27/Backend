@@ -13,6 +13,10 @@ class CowSensor extends Model
     use HasFactory;
     use LogsActivity;
 
+    protected $guarded=[];
+
+    public $timestamps=true;
+
     protected $fillable=['cow_id','sensor_id','values'];
     public function cow(){
         return $this->belongsTo(Cow::class);
@@ -26,6 +30,8 @@ class CowSensor extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

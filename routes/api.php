@@ -22,6 +22,7 @@ use App\Http\Controllers\DoctorView2\BreedingSysController;
 
 
 
+use App\Http\Controllers\MilkAmountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Stevebauman\Location\Facades\Location;
@@ -79,6 +80,11 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
         Route::post('treatments/{treatment}/edit-dose-times',[TreatmentDoseTimesController::class,'editDoseTime']);
 
         Route::get('log',[LogController::class,'index']);
+        Route::get('log_cow/{cow}',[LogController::class,'logCow']);
+
+        Route::get('milk_production/{cow}',[MilkAmountController::class,'index']);
+        Route::get('milk_production_weekly/{cow}',[MilkAmountController::class,'AmountPerWeek']);
+        Route::get('milk_production_monthly/{cow}',[MilkAmountController::class,'AmountPerMonth']);
 
         Route::get('/notes',[NoteController::class,'index']);
         Route::get('/notes/{id}',[NoteController::class,'show']);
@@ -88,6 +94,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
         Route::delete('/delete/{id}',[NoteController::class,'destroy']);
         Route::post('/notes/{id}/star', [NoteController::class, 'star']);
         Route::post('/notes/{id}/unstar', [NoteController::class, 'unstar']);
+        Route::get('/notes/star/all', [NoteController::class, 'starNotes']);
+
 
         //pregnancy
         Route::post('cow/{cow}/pregnant',[PregnancyController::class,'pregnantCow']);
@@ -96,6 +104,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
         //sensor data
         Route::get('sensor',[SensorReadingController::class,'index']);
         Route::get('sensorRead',[SensorReadingController::class,'readingSensor']);
+        Route::get('cowRead',[SensorReadingController::class,'readingCowSensor']);
 
 
         Route::post('/activity-system/create',[ActivitySysController::class,'create']);

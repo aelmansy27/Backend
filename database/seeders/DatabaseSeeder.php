@@ -8,6 +8,7 @@ use App\Models\ActivitySystem;
 use App\Models\BreadingSystem;
 use App\Models\Cow;
 
+use App\Models\MilkAmount;
 use App\Models\Purpose;
 use App\Models\Sensor;
 use App\Models\Treatment;
@@ -28,21 +29,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\User::factory(1)->create();
+       //  \App\Models\User::factory(1)->create();
 
 //         \App\Models\User::factory()->create([
 //             'name' => 'Test User',
 //             'email' => 'test@example.com',
 //         ]);
 
-        Purpose::factory(2)->create();
+      /*  Purpose::factory(2)->create();
          BreadingSystem::factory(5)->create();
         ActivitySystem::factory(5)->create();
          ActivityPlace::factory(5)->create();
-        FeedStock::factory()->count(5)->create();
-       Cow::factory(5)->create();
-        Note::factory()->count(5)->create();
-        CowFeed::factory()->count(5)->create();
+        FeedStock::factory()->count(5)->create();*/
+       //Cow::factory(20)->create();
+  /*      Note::factory()->count(5)->create();
+        CowFeed::factory()->count(5)->create();*/
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -51,10 +52,11 @@ class DatabaseSeeder extends Seeder
         //ActivityPlace::factory(5)->create();
         //Purpose::factory(5)->create();
         //Cow::factory(6)->create();
-        TreatmentStock::factory(10)->create();
-        Treatment::factory(5)->create();
-        TreatmentDoseTimes::factory(10)->create();
-        Sensor::factory(5)->create();
+   /*     treatmentstock::factory(10)->create();
+        treatment::factory(5)->create();
+        treatmentdosetimes::factory(10)->create();
+        sensor::factory(5)->create();*/
+        MilkAmount::factory(10)->create();
 
     }
 }

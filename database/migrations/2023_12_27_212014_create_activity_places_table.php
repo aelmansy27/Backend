@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activity_places', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activitysystem_id');
+            $table->foreignId('activity_system_id');
             $table->string('name');
             $table->string('image');
             $table->text('goal');

@@ -24,8 +24,8 @@ class TreatmentStockFactory extends Factory
             'manufacturing_date' => $this->faker->dateTimeThisMonth(),
             'manufacturing_code' => $this->faker->unique()->randomNumber(),
             'validation_period' => $this->faker->dateTimeThisYear(),
-            'entrance_date' => $this->faker->dateTimeThisYear(),
             'efficiency' => $this->faker->randomFloat(2, 0, 100), // Assuming percentage
+            'concentration'=>$this->faker->randomFloat(2, 0, 100),
             'producer' => $this->faker->company(),
             'amount' => $this->faker->numberBetween(10, 100),
         ];

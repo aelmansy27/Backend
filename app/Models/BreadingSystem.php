@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class BreadingSystem extends Model implements Auditable
+class BreadingSystem extends Model
 {
     use HasFactory;
-    use  \OwenIt\Auditing\Auditable;
+    use LogsActivity;
+
+    protected $guarded=[];
+    public $timestamps=true;
 
     public function activitySystems()
     {
@@ -22,8 +26,15 @@ class BreadingSystem extends Model implements Auditable
     }
     public function cows()
     {
-        return $this->hasMany(Cow::class,'breadingsystem_id');
+        return $this->hasMany(Cow::class);
     }
 
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
+    }
 
 }

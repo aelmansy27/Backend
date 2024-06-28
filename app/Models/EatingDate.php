@@ -12,13 +12,18 @@ class EatingDate extends Model
 {
     use HasFactory;
     use  LogsActivity;
+
+    public $timestamps=true;
+
     public function cowFeed()
     {
-        return $this->belongsTo(CowFeed::class);
+        return $this->belongsTo(CowFeed::class,'cow_feed_id');
     }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

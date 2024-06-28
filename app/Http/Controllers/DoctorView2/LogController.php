@@ -10,6 +10,7 @@ use Spatie\Activitylog\Models\Activity;
 class LogController extends Controller
 {
     public function index(){
+
         $dailyActivities = Activity::all()
             ->groupBy(function ($activity) {
                 return $activity->created_at->format('Y-m-d'); // Group by date
@@ -25,4 +26,27 @@ class LogController extends Controller
         return response()->json($dailyActivities, 200);
 
     }
+
+
+    public function logCow(Cow $cow)
+    {
+        $activities=Activity::query()->where('subject_type', 'App\Models\Cow')
+            ->where('subject_id', $cow->id)
+            ->get();
+
+        $dailyActivities = $activities
+            ->groupBy(function ($activity) {
+                return $activity->created_at ->format('Y-m-d'); // Group by date
+            })
+            ->map(function ($activitiesByDate, $date) {
+                return [
+                    'date' => $date, // Extract date from any activity
+                    'activities' => $activitiesByDate->isEmpty() ? [] : $activitiesByDate,
+                ];
+            })
+            ->values();
+        return response()->json($dailyActivities, 200);
+    }
+
+
 }

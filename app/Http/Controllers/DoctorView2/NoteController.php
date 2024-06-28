@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+/* Display a listing of the resource.
+*/
     public function index()
     {
         $notes = Note::with('cow')->get();
@@ -23,17 +22,15 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+/* Show the form for creating a new resource.
+*/
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+/* Store a newly created resource in storage.
+*/
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -73,9 +70,8 @@ class NoteController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
+/* Display the specified resource.
+*/
     public function show(string $id)
     {
         $notes = Note::with('cow')->findOrFail($id);
@@ -86,9 +82,8 @@ class NoteController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+/* Show the form for editing the specified resource.
+*/
     public function edit(string $id)
     {
         $notes = Note::with('cow')->findOrFail($id);
@@ -98,9 +93,8 @@ class NoteController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+/* Update the specified resource in storage.
+*/
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
@@ -143,7 +137,6 @@ class NoteController extends Controller
 
     public function search(Request $request)
     {
-
         $filter = $request->name; // Assuming $request is available in your controller method
 
 
@@ -196,5 +189,17 @@ class NoteController extends Controller
 
         return response()->json(['message' => 'Message unstarred successfully', 'data' => $message], 200);
     }
-}
+    public function starred()
+    {
+        $starredNotes = Note::where('is_starred', true)->get();
 
+        if ($starredNotes->isEmpty()) {
+            return response()->json(['message' => 'No starred notes found'], 404);
+        }
+        //dd($starredNotes);
+        return response()->json(['message' => 'Starred notes retrieved successfully', 'data' => $starredNotes], 200);
+
+    }
+
+
+}

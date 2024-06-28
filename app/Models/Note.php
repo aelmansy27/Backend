@@ -12,13 +12,10 @@ class Note extends Model
     use HasFactory;
     use LogsActivity;
     protected $table='notes';
-    protected $fillable=[
-        'note_id',
-        'cow_id',
+    protected $guarded=[];
 
-        'title',
-        'body'
-    ];
+    public $timestamps=true;
+
     public function cow()
     {
         return $this->belongsTo(Cow::class, 'note_id');
@@ -26,6 +23,9 @@ class Note extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
+

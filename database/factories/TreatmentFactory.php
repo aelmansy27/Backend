@@ -22,9 +22,9 @@ class TreatmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'cow_id' => Cow::factory(),
+            'cow_id' => Cow::inRandomOrder()->first()->id,
             'name'=>$this->faker->sentence(),
-            'treatmentstock_id' => TreatmentStock::factory(),
+            'treatment_stock_id' => TreatmentStock::inRandomOrder()->first()->id,
             'disease' => $this->faker->sentence(),
             'doses' => $this->faker->randomNumber(2), // Example random decimal between 0 and 100
             'diagnose' => $this->faker->paragraph(),

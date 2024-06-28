@@ -13,10 +13,16 @@ class TreatmentStock extends Model
     use HasFactory;
     use LogsActivity;
 
+    protected $guarded=[];
+
+    public $timestamps=true;
+
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
     public function treatments(){
         return $this->hasMany(Treatment::class);

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('cow_id');
-            $table->foreignId('breadindsystem_id');
-            $table->foreignId('feedstock_id');
+            $table->foreignId('breading_system_id');
+            $table->foreignId('feed_stock_id');
             $table->decimal('amount');
             $table->decimal('actual_amount');
             $table->timestamps();

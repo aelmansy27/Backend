@@ -12,13 +12,18 @@ class WalkingDate extends Model
 {
     use HasFactory;
     use LogsActivity;
+
+    public $timestamps=true;
+
     public function activitySystem()
     {
-        return $this->belongsTo(ActivitySystem::class);
+        return $this->belongsTo(ActivitySystem::class,'activity_system_id');
     }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs() ;
     }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -14,15 +13,16 @@ class ActivitySystem extends Model
     use  LogsActivity;
 
     protected $guarded=[];
+    public $timestamps=true;
 
     public function cows()
     {
-        return $this->hasMany(Cow::class,'activitysystem_id');
+        return $this->hasMany(Cow::class,'activity_system_id');
     }
 
     public function breadingSystem()
     {
-        return $this->belongsTo(BreadingSystem::class);
+        return $this->belongsTo(BreadingSystem::class,'breading_system_id');
     }
 
     public function activityPlaces()
@@ -47,7 +47,9 @@ class ActivitySystem extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
 

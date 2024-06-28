@@ -13,21 +13,25 @@ class CowFeed extends Model
     use HasFactory;
     use  LogsActivity;
 
+    protected $guarded=[];
+
+    public $timestamps=true;
+
     public function cow()
     {
-        return $this->belongsTo(Cow::class);
+        return $this->belongsTo(Cow::class,'cow_id');
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
     public function feedStock()
     {
-        return $this->belongsTo(FeedStock::class);
+        return $this->belongsTo(FeedStock::class,'feed_stock_id');
     }
-    public function breedingSystem()
+    public function breadingSystem()
     {
-        return $this->belongsTo(BreadingSystem::class);
+        return $this->belongsTo(BreadingSystem::class,'breading_system_id');
     }
     public function eatingDates()
     {
@@ -37,6 +41,8 @@ class CowFeed extends Model
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['*']);
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

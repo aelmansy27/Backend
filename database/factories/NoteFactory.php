@@ -20,7 +20,7 @@ class NoteFactory extends Factory
         $cowId=Cow::inRandomOrder()->first()->id;
 
         return [
-            'note_id' => $this->faker->unique()->regexify('[A-Za-z0-9]{5}'),
+            'noteId' => $this->faker->unique()->regexify('[A-Za-z0-9]{5}'),
             'cow_id' => $cowId,
             'image' => $this->faker->imageUrl(),
             'title' => $this->faker->sentence,

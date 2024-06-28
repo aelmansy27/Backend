@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('milking_dates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activitysystem_id');
+            $table->foreignId('activity_system_id');
             $table->dateTimeTz('milking_start')->nullable();
             $table->dateTimeTz('milking_end')->nullable();
             $table->timestamps();
