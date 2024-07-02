@@ -1,0 +1,115 @@
+[
+    {
+        "cow_id": 1,
+        "sensor_readings":
+            {
+                "body_temperature": 38.3,
+                "respiratory_rate": 16,
+                "sleeping_duration": 6,
+                "heart_rate": 34,
+                "ruminating":7
+            }
+    },
+    {
+        "cow_id": 2,
+        "sensor_readings":
+            {
+
+                "body_temperature": 38.3,
+                "respiratory_rate": 16,
+                "sleeping_duration": 6,
+                "heart_rate": 34,
+                "ruminating":7
+
+            }
+    },
+    {
+        "cow_id": 3,
+        "sensor_readings":
+            {
+
+                "body_temperature": 40.4,
+                "respiratory_rate": 23,
+                "sleeping_duration": 7,
+                "heart_rate":33,
+                "ruminating": 3
+            }
+    },
+    {
+        "cow_id": 4,
+        "sensor_readings": {
+                "body_temperature": 40.4,
+                "respiratory_rate": 23,
+                "sleeping_duration": 7,
+                "heart_rate":33,
+                "ruminating": 3
+            }
+    },
+    {
+        "cow_id": 5,
+        "sensor_readings":
+        {
+                "body_temperature": 40.4,
+                "respiratory_rate": 23,
+                "sleeping_duration": 7,
+                "heart_rate":33,
+                "ruminating": 3
+        }
+    },
+    {
+        "cow_id": 6,
+        "sensor_readings":
+        {
+            "body_temperature":40.0,
+            "respiratory_rate":6,
+            "sleeping_duration":4,
+            "heart_rate":37,
+            "ruminating":5
+        }
+    },
+    {
+        "cow_id": 7,
+        "sensor_readings":
+        {
+            "body_temperature":38.8,
+            "respiratory_rate":15,
+            "sleeping_duration":4,
+            "heart_rate":66,
+            "ruminating":4
+
+        }
+    },
+    {
+        "cow_id": 8,
+        "sensor_readings":
+        {
+
+            "body_temperature": 40.4,
+            "respiratory_rate": 23,
+            "sleeping_duration": 7,
+            "heart_rate":33,
+            "ruminating": 3
+        }
+    },
+    {
+        "cow_id": 9,
+        "sensor_readings": {
+            "body_temperature": 40.4,
+            "respiratory_rate": 23,
+            "sleeping_duration": 7,
+            "heart_rate":33,
+            "ruminating": 3
+        }
+    },
+    {
+        "cow_id": 10,
+        "sensor_readings":
+        {
+            "body_temperature": 40.4,
+            "respiratory_rate": 23,
+            "sleeping_duration": 7,
+            "heart_rate":33,
+            "ruminating": 3
+        }
+    }
+]
