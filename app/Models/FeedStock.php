@@ -20,6 +20,11 @@ class FeedStock extends Model
     {
         return $this->hasMany(CowFeed::class);
     }
+
+    public function department(){
+        return $this->belongsTo(Department::class,'department_id');
+    }
+
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()

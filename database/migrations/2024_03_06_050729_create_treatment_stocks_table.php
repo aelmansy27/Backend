@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('treatment_stocks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('department_id');
             $table->string('name'); //name + gm
             $table->string('type');
             $table->dateTimeTz('manufacturing_date');

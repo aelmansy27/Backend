@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PurposeResource\Pages;
-use App\Filament\Resources\PurposeResource\RelationManagers;
-use App\Models\Purpose;
+use App\Filament\Resources\MilkAmountResource\Pages;
+use App\Filament\Resources\MilkAmountResource\RelationManagers;
+use App\Models\MilkAmount;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,18 +14,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PurposeResource extends Resource
+class MilkAmountResource extends Resource
 {
-    protected static ?string $model = Purpose::class;
+    protected static ?string $model = MilkAmount::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 5;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
+                //
             ]);
     }
 
@@ -32,8 +32,9 @@ class PurposeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('cow.cowId'),
+                Tables\Columns\TextColumn::make('morning_amount'),
+                Tables\Columns\TextColumn::make('afternoon_amount')
             ])
             ->filters([
                 //
@@ -58,9 +59,9 @@ class PurposeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPurposes::route('/'),
-            'create' => Pages\CreatePurpose::route('/create'),
-            'edit' => Pages\EditPurpose::route('/{record}/edit'),
+            'index' => Pages\ListMilkAmounts::route('/'),
+            'create' => Pages\CreateMilkAmount::route('/create'),
+            'edit' => Pages\EditMilkAmount::route('/{record}/edit'),
         ];
     }
 }

@@ -96,14 +96,9 @@ class SensorReadingController extends Controller
         $changedCows = [];
 
         foreach ($sensorData as $cowData) {
-
-            $cowIdToStatusMap = [];
             $cow = Cow::find($cowData['cow_id']);
 
-            //$cowId = $cowData['cow_id']; // Get the cow ID
-
             $currentStatus = $cow->cow_status; // Save current status
-            //dd($currentStatus); //0
             if ($cow) {
                 // foreach ($cowData as $data) {
                 $jsonData = json_encode($cowData['sensor_readings']);
@@ -116,17 +111,8 @@ class SensorReadingController extends Controller
 
                     if ($cow->cow_status != $currentStatus && !in_array($cow, $changedCows, true)) {
                         $changedCows[] = $cow;
-
-                        /* CowSensor::create([
-                             'cow_id' => $cow->id,
-                             'sensor_id' => $data['sensor_id'],
-                             'values' => $data['value']
-                         ]);*/
                     }
                 }
-
-                //     }
-
             }
         }
             if (!empty($changedCows)) {

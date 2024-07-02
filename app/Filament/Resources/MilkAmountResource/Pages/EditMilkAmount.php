@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\FeedStockResource\Pages;
+namespace App\Filament\Resources\MilkAmountResource\Pages;
 
-use App\Filament\Resources\FeedStockResource;
+use App\Filament\Resources\MilkAmountResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditFeedStock extends EditRecord
+class EditMilkAmount extends EditRecord
 {
-    protected static string $resource = FeedStockResource::class;
+    protected static string $resource = MilkAmountResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -16,10 +16,8 @@ class EditFeedStock extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
-
 }

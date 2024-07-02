@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PurposeResource\Pages;
-use App\Filament\Resources\PurposeResource\RelationManagers;
-use App\Models\Purpose;
+use App\Filament\Resources\DepartmentResource\Pages;
+use App\Filament\Resources\DepartmentResource\RelationManagers;
+use App\Models\Department;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,18 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PurposeResource extends Resource
+class DepartmentResource extends Resource
 {
-    protected static ?string $model = Purpose::class;
+    protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 5;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
+                Forms\Components\TextInput::make('name')
             ]);
     }
 
@@ -32,8 +31,7 @@ class PurposeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name'),
+               Tables\Columns\TextColumn::make('name')
             ])
             ->filters([
                 //
@@ -58,9 +56,9 @@ class PurposeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPurposes::route('/'),
-            'create' => Pages\CreatePurpose::route('/create'),
-            'edit' => Pages\EditPurpose::route('/{record}/edit'),
+            'index' => Pages\ListDepartments::route('/'),
+            'create' => Pages\CreateDepartment::route('/create'),
+            'edit' => Pages\EditDepartment::route('/{record}/edit'),
         ];
     }
 }

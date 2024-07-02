@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('milk_amounts', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cow_id');
-            $table->foreignId('department_id');
-            $table->decimal('morning_amount');
-            $table->decimal('afternoon_amount');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('milk_amounts');
+        Schema::dropIfExists('departments');
     }
 };

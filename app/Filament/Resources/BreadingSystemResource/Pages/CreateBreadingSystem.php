@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBreadingSystem extends CreateRecord
 {
     protected static string $resource = BreadingSystemResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

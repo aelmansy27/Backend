@@ -13,7 +13,6 @@ class Cow extends Model
     use HasFactory;
     use LogsActivity;
 
-    // use  \OwenIt\Auditing\Auditable;
     protected $guarded = [];
     public $timestamps=true;
 

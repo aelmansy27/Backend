@@ -81,6 +81,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
 
         Route::get('log',[LogController::class,'index']);
         Route::get('log_cow/{cow}',[LogController::class,'logCow']);
+        Route::get('/archive/logs',[LogController::class,'archiveLog']);
 
         Route::get('milk_production/{cow}',[MilkAmountController::class,'index']);
         Route::get('milk_production_weekly/{cow}',[MilkAmountController::class,'AmountPerWeek']);
@@ -138,8 +139,6 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/doc-breeding-system/search',[BreedingSysController::class,'search']);
     Route::get('/doc-breeding-system/{breadingSystem}/filter',[BreedingSysController::class,'filterByCowStatus']);
     Route::get('/doc-breeding-system/filter-search',[BreedingSysController::class,'searchWithFilter']);
-
-
 
 });
 

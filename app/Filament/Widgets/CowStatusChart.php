@@ -13,6 +13,10 @@ class CowStatusChart extends ChartWidget
     protected static ?string $heading = 'Cows status';
     public ?string $filter = 'Normal';
     protected int | string | array $columnSpan=2;
+
+
+
+    protected static ?int $sort=3;
     protected function getData(): array
     {
         $dataNormal = Trend::query(Cow::where('cow_status',1))

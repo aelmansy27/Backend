@@ -18,7 +18,7 @@ class TreatmentDoseTimesResource extends Resource
 {
     protected static ?string $model = TreatmentDoseTimes::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clock';
 
     protected static ?string $navigationGroup = 'Treatments';
 

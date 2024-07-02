@@ -25,15 +25,7 @@ class User extends Authenticatable implements FilamentUser , HasName
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'password',
-        'is_doctor',
-        'image',
-        'phone',
-    ];
+    protected $guarded=[];
 
     public $timestamps=true;
 
@@ -72,6 +64,9 @@ class User extends Authenticatable implements FilamentUser , HasName
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function department(){
+        return $this->belongsTo(Department::class,'department_id');
+    }
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()

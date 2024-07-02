@@ -17,14 +17,19 @@ class TreatmentStock extends Model
 
     public $timestamps=true;
 
+    public function department(){
+        return $this->belongsTo(Department::class,'department_id');
+    }
+
+    public function treatments(){
+        return $this->hasMany(Treatment::class);
+    }
+
     public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
     {
         return LogOptions::defaults()
             ->logOnly(['*'])
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
-    }
-    public function treatments(){
-        return $this->hasMany(Treatment::class);
     }
 }
